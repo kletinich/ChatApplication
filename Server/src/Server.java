@@ -21,9 +21,6 @@ public class Server {
     private Vector<ClientHandler> _clients;
     private int _maxNumOfConnections;
 
-    private DataInputStream _in;
-    private DataOutputStream _out;
-
     public Server(){
         this(DEFAULT_IP_ADDRESS, DEFAULT_PORT, DEFAULT_MAX_NUM_OF_CONNECTIONS);
     }
@@ -43,14 +40,11 @@ public class Server {
             this._server = new ServerSocket(this._port, this._maxNumOfConnections, bindAddress);
             System.out.println("Server started at IP: " + this._ipAddress + " on port: " + this._port);
 
-            this._in = new DataInputStream(this._socket.getInputStream());
-            this._out = new DataOutputStream(this._socket.getOutputStream());
-
             while(true){
                 this._socket = this._server.accept();
                 System.out.println("Accepted connection with:" + this._socket.getInetAddress().getHostAddress());
 
-                ClientHandler newClient = new ClientHandler(this);
+                ClientHandler newClient = new ClientHandler(this, this._socket);
                 this._clients.add(newClient);
 
                 newClient.start();

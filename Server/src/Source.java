@@ -1,5 +1,6 @@
-public class App {
+public class Source {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+        Server server = new Server();
+        server.startServer();
     }
 }
