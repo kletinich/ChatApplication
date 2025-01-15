@@ -6,24 +6,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application{
+public class MainWindow extends Application{
 
     public static Stage _stage = null;
-
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("ChatWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("src\\main\\resources\\com\\client\\ChatWindow.fxml"));
         Scene scene = new Scene(root);
-        stage.setTitle("How you doin'?");
         stage.setScene(scene);
         this._stage = stage;
         stage.show();
     }
-    public static void main(String[] args) {
-        //Client client = new Client();
-        //client.connectToServer();
-
-        launch(args);
-    }
-
+    
 }
