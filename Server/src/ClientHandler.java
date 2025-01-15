@@ -25,7 +25,7 @@ public class ClientHandler extends Thread{
 
     @Override
     public void run(){
-
+        closeConnection();
     }
 
     /*
@@ -36,6 +36,7 @@ public class ClientHandler extends Thread{
         try {
             this._in.close();
             this._socket.close();
+            System.out.println("Closed connection");
         } catch (IOException e) {
             System.err.println(this._socket.getInetAddress().getHostAddress() + ":");
             System.err.println("Failed to close input stream or socket");
