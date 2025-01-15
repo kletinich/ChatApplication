@@ -1,5 +1,3 @@
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
@@ -33,6 +31,12 @@ public class Server {
         this._clients = new Vector<>(this._maxNumOfConnections);
     }
 
+    /*
+     * Start the server:
+     * Bind to ip address
+     * listen to clients
+     * client connects - pass the handle to the ClientHandler
+     */
     public void startServer(){
         try{
             InetAddress bindAddress = InetAddress.getByName(this._ipAddress);
@@ -52,6 +56,32 @@ public class Server {
 
         }catch(IOException e){
             System.err.println("Error creating server");
+        }
+    }
+
+    /*
+     * Iterating over the connected clients
+     * Close their connection
+     * Remove them from the list of connected clients
+     */
+    public void closeClients(){
+        for(ClientHandler client: this._clients){
+            client.closeConnection();
+        }
+
+        this._clients.removeAllElements();
+    }
+
+    /*
+     * Close all the connected clients
+     * Close the server
+     */
+    public void closeServer(){
+        this.closeClients();
+        try {
+            this._server.close();
+        } catch (IOException e) {
+            System.err.println("Failed  to close server");
         }
     }
 }

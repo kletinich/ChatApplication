@@ -27,4 +27,18 @@ public class ClientHandler extends Thread{
     public void run(){
 
     }
+
+    /*
+     * Close the input stream
+     * Close the connection
+     */
+    public void closeConnection(){
+        try {
+            this._in.close();
+            this._socket.close();
+        } catch (IOException e) {
+            System.err.println(this._socket.getInetAddress().getHostAddress() + ":");
+            System.err.println("Failed to close input stream or socket");
+        }
+    }
 }
