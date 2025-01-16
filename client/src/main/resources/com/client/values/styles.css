@@ -1,3 +1,15 @@
 .light-blue-background{
     -fx-background-color: #ADD8E6;
 }
+
+.beige-background{
+    -fx-background-color:  #F5F5DC;
+}
+
+.transparent-background{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.radius{
+    -fx-background-radius: 100px;
+}
