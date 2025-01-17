@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ChatWindowController">
+   <left>
+      <StackPane prefHeight="400.0" prefWidth="221.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox fx:id="login_view" prefHeight="200.0" prefWidth="100.0" styleClass="beige-background" stylesheets="@com/client/values/styles.css" />
+            <HBox fx:id="dashboard_view" prefHeight="100.0" prefWidth="200.0" styleClass="light-blue-background" stylesheets="@com/client/values/styles.css" />
+         </children>
+      </StackPane>
+   </left>
+</BorderPane>

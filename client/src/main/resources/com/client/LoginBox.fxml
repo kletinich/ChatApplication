@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="login_view" alignment="CENTER" prefHeight="200.0" prefWidth="245.0" stylesheets="@values/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.LoginController">
+   <children>
+      <Label alignment="CENTER" prefHeight="17.0" prefWidth="265.0" text="Login" textAlignment="CENTER">
+         <VBox.margin>
+            <Insets bottom="5.0" />
+         </VBox.margin>
+      </Label>
+      <HBox alignment="CENTER_LEFT" prefHeight="21.0" prefWidth="221.0">
+         <children>
+            <Label prefHeight="31.0" prefWidth="63.0" text="username:">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </Label>
+            <Pane prefHeight="25.0" prefWidth="7.0" />
+            <TextField fx:id="username_login_text_field" prefHeight="25.0" prefWidth="105.0" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" prefHeight="21.0" prefWidth="221.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="23.0" prefWidth="58.0" text="password:">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+            </Label>
+            <Pane prefHeight="25.0" prefWidth="13.0" />
+            <TextField fx:id="password_login_text_view" prefHeight="25.0" prefWidth="105.0" />
+         </children>
+      </HBox>
+      <Button fx:id="connect_btn" mnemonicParsing="false" onAction="#login" text="Connect">
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+      </Button>
+      <HBox alignment="CENTER_LEFT" prefHeight="21.0" prefWidth="221.0">
+         <children>
+            <Pane prefHeight="25.0" prefWidth="13.0" />
+            <Label fx:id="forgot_password_label" prefHeight="17.0" prefWidth="109.0" text="Forgot password">
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Pane prefHeight="21.0" prefWidth="19.0" />
+            <Label fx:id="register_label" prefHeight="17.0" prefWidth="62.0" text="Register">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets top="5.0" />
+         </padding>
+      </HBox>
+   </children>
+</VBox>
