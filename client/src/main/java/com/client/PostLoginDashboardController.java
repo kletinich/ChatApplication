@@ -2,6 +2,7 @@ package com.client;
 
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
 /*
  * A controller for the post login phase of the chat app.
@@ -10,6 +11,9 @@ import javafx.scene.image.ImageView;
 public class PostLoginDashboardController {
     
     @FXML
+    private HBox chatDashboard;
+
+    @FXML
     private ImageView chat_icon;
 
     @FXML
@@ -17,7 +21,6 @@ public class PostLoginDashboardController {
 
     @FXML
     public void initialize(){
-
     }
 
     @FXML
@@ -35,5 +38,7 @@ public class PostLoginDashboardController {
          * 1. set the chats view to visible.
          * 2. set all the other views to unvisible
          */
+
+        this.chatDashboard.setVisible(true);
     }
 }

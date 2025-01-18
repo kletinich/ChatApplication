@@ -20,7 +20,7 @@ public class ChatWindowController {
 
         // temp because no login phase for this version
         this.loginBox.setVisible(false);
-        this.postLogingDashboard.setVisible(true);
+        //this.postLogingDashboard.setVisible(true);
     }
  
    
