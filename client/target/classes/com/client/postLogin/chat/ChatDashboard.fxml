@@ -2,19 +2,42 @@
 
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
 
-<HBox fx:id="chatDashboard" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.ChatDashboardController">
+<HBox fx:id="chatDashboard" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="536.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.ChatDashboardController">
    <children>
-      <ListView fx:id="listOfChats" prefHeight="200.0" prefWidth="200.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="404.0" stroke="BLACK" strokeType="INSIDE" width="2.0" />
+      <VBox prefHeight="400.0" prefWidth="226.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="search_icon" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/search_icon.png" />
+                     </image>
+                  </ImageView>
+                  <TextField fx:id="searchBar" prefHeight="25.0" prefWidth="113.0" />
+                  <Pane prefHeight="71.0" prefWidth="13.0" />
+               </children>
+            </HBox>
+            <ListView fx:id="listOfChats" prefHeight="357.0" prefWidth="112.0" />
+         </children>
+      </VBox>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="404.0" stroke="BLACK" strokeType="INSIDE" width="4.0" />
       <ScrollPane fx:id="chatScroller" prefHeight="400.0" prefWidth="398.0">
          <content>
-            <VBox fx:id="chatBox" prefHeight="401.0" prefWidth="396.0" />
+            <VBox fx:id="chatBox" prefHeight="401.0" prefWidth="383.0" />
          </content>
       </ScrollPane>
    </children>
+   <effect>
+      <Blend />
+   </effect>
 </HBox>
