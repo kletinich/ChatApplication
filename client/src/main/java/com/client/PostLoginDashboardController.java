@@ -21,6 +21,7 @@ public class PostLoginDashboardController {
 
     @FXML
     public void initialize(){
+        this.chatDashboard.setVisible(false);
     }
 
     @FXML
