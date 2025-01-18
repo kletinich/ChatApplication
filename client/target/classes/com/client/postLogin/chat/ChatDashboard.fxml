@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
 
-<HBox fx:id="chatDashboard" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="chatDashboard" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.ChatDashboardController">
    <children>
+      <ListView fx:id="listOfChats" prefHeight="200.0" prefWidth="200.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="404.0" stroke="BLACK" strokeType="INSIDE" width="2.0" />
+      <ScrollPane fx:id="chatScroller" prefHeight="400.0" prefWidth="398.0">
+         <content>
+            <VBox fx:id="chatBox" prefHeight="401.0" prefWidth="396.0" />
+         </content>
+      </ScrollPane>
    </children>
 </HBox>
