@@ -6,8 +6,8 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.ChatWindowController">
    <left>
       <StackPane prefHeight="400.0" prefWidth="221.0" BorderPane.alignment="CENTER">
-         <fx:include source="LoginBox.fxml" fx:id="loginBox"/>
-         <fx:include source="PostLoginDashBoard.fxml" fx:id="postLogingDashboard"/>
+         <fx:include source="login//LoginBox.fxml" fx:id="loginBox"/>
+         <fx:include source="postLogin//PostLoginDashBoard.fxml" fx:id="postLogingDashboard"/>
       </StackPane>
    </left>
 </BorderPane>
