@@ -35,7 +35,7 @@
                </HBox.margin>
             </Label>
             <Pane prefHeight="25.0" prefWidth="13.0" />
-            <TextField fx:id="password_login_text_view" prefHeight="25.0" prefWidth="105.0" />
+            <TextField fx:id="password_login_text_field" prefHeight="25.0" prefWidth="105.0" />
          </children>
       </HBox>
       <Button fx:id="connect_btn" mnemonicParsing="false" onAction="#login" text="Connect">

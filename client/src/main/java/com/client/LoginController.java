@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+// A controller for the login phase of the chat app
 public class LoginController {
     @FXML
     private TextField username_login_text_field;
@@ -27,13 +28,13 @@ public class LoginController {
 
     @FXML
     public void login(){
-        if(this.username_login_text_field.getText().isEmpty() || 
-            this.password_login_text_field.getText().isEmpty()){
-                System.out.println("Error");
-            }
+        if(username_login_text_field.getText().trim().isEmpty() || 
+            password_login_text_field.getText().trim().isEmpty()){
+            System.err.println("Empty textField");
+        }
 
         else{
-            System.out.println("Success");
+            System.out.println("OK");
         }
     }
 }
