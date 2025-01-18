@@ -1,6 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" />
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="283.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.PostLoginDashboardController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="19.0">
+         <children>
+            <Pane prefHeight="153.0" prefWidth="100.0" />
+            <ImageView fx:id="chat_icon" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/chat_icon.png" />
+               </image>
+            </ImageView>
+            <Pane prefHeight="169.0" prefWidth="100.0" />
+            <ImageView fx:id="quit_icon" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#quitIconClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/turn_off_icon.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </ImageView>
+         </children>
+      </VBox>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="406.0" stroke="BLACK" strokeType="INSIDE" width="2.0" />
+   </children>
+</HBox>
