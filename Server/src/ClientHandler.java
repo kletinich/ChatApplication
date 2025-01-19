@@ -4,6 +4,9 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+/*
+ * Handles one connection with one clientHa
+ */
 public class ClientHandler extends Thread{
     private Server _server;
     private Socket _socket;

@@ -5,6 +5,10 @@ import java.net.Socket;
 
 import java.util.Vector;
 
+/*
+ * Handles socket connections from users.
+ * Each connected user is handled by ClientHandler class
+ */
 public class Server {
     public static final String DEFAULT_IP_ADDRESS = "127.0.0.1";
     public static final int DEFAULT_PORT = 8080;
