@@ -1,8 +1,9 @@
-import java.io.DataInputStream;
-import java.io.DataOutput;
-import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /*
  * Handles one connection with one clientHa
@@ -11,16 +12,20 @@ public class ClientHandler extends Thread{
     private Server _server;
     private Socket _socket;
 
-    private DataInputStream _in;
-    private DataOutput _out;
+    private ObjectInputStream _in;
+    private ObjectOutput _out;
 
-    public ClientHandler(Server server, Socket socket){
+    private ArrayList<User> _users;
+
+    public ClientHandler(Server server, Socket socket, ArrayList<User> users){
         this._server = server;
         this._socket = socket;
 
+        this._users = users;
+
         try {
-            this._in = new DataInputStream(socket.getInputStream());
-            this._out = new DataOutputStream(socket.getOutputStream());
+            this._out = new ObjectOutputStream(this._socket.getOutputStream());
+            this._in = new ObjectInputStream(this._socket.getInputStream());
         } catch (IOException e) {
             System.err.println("Error creating input or output stream");
         }
@@ -28,7 +33,18 @@ public class ClientHandler extends Thread{
 
     @Override
     public void run(){
+        sendUsersListToClient();
         closeConnection();
+    }
+
+    public void sendUsersListToClient(){
+        try{
+            System.out.println(_users.toString());
+            //this._out.writeObject(this._users);
+            this._in.readObject();
+        }catch(IOException e){
+            System.err.println("Failed to send list of users to client");
+        }
     }
 
     /*

@@ -1,9 +1,11 @@
 package com.client;
 
+import java.io.Serializable;
+
 /*
  * A user class for storing user data for the chats
  */
-public class User {
+public class User implements Serializable{
     protected String _firstName;  // real first name
     protected String _lastName;   // real last name
 

@@ -23,6 +23,8 @@ public class Server {
     private Vector<ClientHandler> _clients;
     private int _maxNumOfConnections;
 
+    private UserList _users;
+
     public Server(){
         this(DEFAULT_IP_ADDRESS, DEFAULT_PORT, DEFAULT_MAX_NUM_OF_CONNECTIONS);
     }
@@ -31,6 +33,8 @@ public class Server {
         this._ipAddress = ipAddress;
         this._port = port;
         this._maxNumOfConnections = maxNumOfConnections;
+
+        this._users = null;
 
         this._clients = new Vector<>(this._maxNumOfConnections);
     }
@@ -51,10 +55,10 @@ public class Server {
             while(true){
                 this._socket = this._server.accept();
                 System.out.println("Accepted connection with:" + this._socket.getInetAddress().getHostAddress());
-
-                ClientHandler newClient = new ClientHandler(this, this._socket);
+                
+                ClientHandler newClient = new ClientHandler(this, this._socket, this._users.getUsersWithoutPassword());
                 this._clients.add(newClient);
-
+        
                 newClient.start();
             }
 
@@ -87,5 +91,9 @@ public class Server {
         } catch (IOException e) {
             System.err.println("Failed  to close server");
         }
+    }
+
+    public void setUsersList(UserList users){
+        this._users = users;
     }
 }

@@ -3,9 +3,6 @@
 /*
  * Manages the server side
  */
-
-import java.util.ArrayList;
-
 public class Manager {
     private Server _server;
     private UserList _users;
@@ -16,9 +13,9 @@ public class Manager {
     }
 
     public void start(){
-        this._server.startServer();
-
         this._users.copyUsers(FileHandler.readUsersFromFile());
+        this._server.setUsersList(this._users);
+        this._server.startServer();
     }
 
     public void closeProgram(){

@@ -26,9 +26,9 @@ public class UserList {
      */
     public ArrayList<User> getUsersWithoutPassword(){
         ArrayList<User> usersWithNoPassword = new ArrayList<>();
-
+    
         for(ThisUser user: this._users){
-            usersWithNoPassword.add((User)user);
+            usersWithNoPassword.add(new User(user.getFirstName(), user.getLastName(), user.getUsername()));
         }
 
         return usersWithNoPassword;
