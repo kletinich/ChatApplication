@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/java,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,visualstudiocode
 
+## Users info ##
+*.info
+
 ### Java ###
 # Compiled class file
 *.class
