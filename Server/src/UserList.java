@@ -5,20 +5,20 @@ import java.util.ArrayList;
  * A container for users that registered to the app
  */
 public class UserList {
-    private ArrayList<ThisUser> users;
+    private ArrayList<ThisUser> _users;
     
-    private int numOfUsers;
+    private int _numOfUsers;
 
     public UserList(){
-        this.users = new ArrayList<>();
-        this.numOfUsers = 0;
+        this._users = new ArrayList<>();
+        this._numOfUsers = 0;
     }
 
     /*
      * Get the list of users with password (for server usage)
      */
     public ArrayList<ThisUser> getUsersWithPassword(){
-        return this.users;
+        return this._users;
     }
 
     /*
@@ -27,11 +27,18 @@ public class UserList {
     public ArrayList<User> getUsersWithoutPassword(){
         ArrayList<User> usersWithNoPassword = new ArrayList<>();
 
-        for(ThisUser user: this.users){
+        for(ThisUser user: this._users){
             usersWithNoPassword.add((User)user);
         }
 
         return usersWithNoPassword;
+    }
+
+    /*
+     * copy all the users data to this class
+     */
+    public void copyUsers(ArrayList<ThisUser> users){
+        this._users = users;
     }
 
     /*
@@ -40,14 +47,14 @@ public class UserList {
      */
     public boolean addUser(ThisUser newUser){
         String username = newUser.getUsername();
-        for(ThisUser user: this.users){
+        for(ThisUser user: this._users){
             if(user.getUsername().equals(username)){
                 return false;
             }
         }
 
-        this.users.add(newUser);
-        numOfUsers++;
+        this._users.add(newUser);
+        this._numOfUsers++;
         return true;
     }
 
@@ -56,10 +63,10 @@ public class UserList {
      * Return true if user successfully removed, false otherwise.
      */
     public boolean removeUserByUsername(String username){
-        for(ThisUser user: this.users){
+        for(ThisUser user: this._users){
             if(user.getUsername().equals(username)){
-                this.users.remove(user);
-                this.numOfUsers--;
+                this._users.remove(user);
+                this._numOfUsers--;
                 
                 return true;
             }
