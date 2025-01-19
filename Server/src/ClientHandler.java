@@ -4,6 +4,7 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import com.classes.*;
 
 /*
  * Handles one connection with one clientHa
@@ -40,8 +41,7 @@ public class ClientHandler extends Thread{
     public void sendUsersListToClient(){
         try{
             System.out.println(_users.toString());
-            //this._out.writeObject(this._users);
-            this._in.readObject();
+            this._out.writeObject(this._users);
         }catch(IOException e){
             System.err.println("Failed to send list of users to client");
         }

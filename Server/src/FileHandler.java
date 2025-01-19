@@ -1,14 +1,13 @@
-
-/*
- * A class for reading and writing data with files
- */
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import com.classes.*;
 
+/*
+ * A class for reading and writing data with files
+ */
 public class FileHandler {
     public static final String FILE_NAME = "users.info";
 
@@ -50,7 +49,7 @@ public class FileHandler {
                 String lastName = parsedInfo[1];
                 String username = parsedInfo[2];
                 String password = parsedInfo[3];
-
+                
                 users.add(new ThisUser(firstName, lastName, username, password));
             }
 

@@ -1,12 +1,14 @@
+package com.classes;
+
 public class ThisUser extends User{
     private String _password;
 
-    ThisUser(String username, String password){
+    public ThisUser(String username, String password){
         super(username);
         this._password = password;
     }
 
-    ThisUser(String firstName, String lastName, String username, String password){
+    public ThisUser(String username, String password, String firstName, String lastName){
         super(firstName, lastName, username);
         this._password = password;
     }

@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+import com.classes.*;
 
 /*
  * A container for users that registered to the app
