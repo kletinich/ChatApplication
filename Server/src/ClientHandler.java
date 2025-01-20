@@ -40,7 +40,6 @@ public class ClientHandler extends Thread{
 
     public void sendUsersListToClient(){
         try{
-            System.out.println(_users.toString());
             this._out.writeObject(this._users);
         }catch(IOException e){
             System.err.println("Failed to send list of users to client");

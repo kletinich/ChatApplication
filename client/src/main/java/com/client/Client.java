@@ -52,14 +52,10 @@ public class Client {
     public void getUsersListFromServer(){
         try{
             Object data = this._in.readObject();
-            if(data instanceof User){
+            if(data instanceof ArrayList){
                 this._users = (ArrayList<User>)data;
-
-                for(User user:_users){
-                    System.out.print(user.getFirstName() + " ");
-                    System.out.print(user.getLastName() + " ");
-                    System.out.println(user.getUsername());
-                }
+                
+                // to do: received list of users. move it to display
             }
 
             else{
