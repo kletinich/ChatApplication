@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 /*
  * A controller for viewing all the open chats, and chat with one of the chats
  */
-public class ChatDashboardController {
+public class ChatDashboardController extends Controller {
     
     @FXML
     private ListView listOfChats;

@@ -8,7 +8,7 @@ import javafx.scene.layout.HBox;
  * A controller for the post login phase of the chat app.
  * Controlls navigation through the app
  */
-public class PostLoginDashboardController {
+public class PostLoginDashboardController extends Controller{
     
     @FXML
     private HBox chatDashboard;

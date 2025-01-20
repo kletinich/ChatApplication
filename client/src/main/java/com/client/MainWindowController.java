@@ -7,7 +7,7 @@ import javafx.scene.layout.VBox;
 /*
  * A controller for the main app window that controls all the sub-windows
  */
-public class MainWindowController {
+public class MainWindowController extends Controller{
 
     @FXML
     private VBox loginBox;
@@ -20,7 +20,6 @@ public class MainWindowController {
 
         // temp because no login phase for this version
         this.loginBox.setVisible(false);
-
         this.postLoginDashboard.setVisible(true);
     }
  

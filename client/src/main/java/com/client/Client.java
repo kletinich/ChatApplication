@@ -31,15 +31,21 @@ public class Client {
         this._port = port;
 
         this._users = null;
+
+        System.out.println("---------------------------------------------");
+        System.out.println("Initialized client. Will try to connect to: ");
+        System.out.println("IP Address: " + this._ip.toString() + ", Port: " + this._port);
+        System.out.println("---------------------------------------------");
     }
 
     public void connectToServer(){
-                try{
+        try{
             this._socket = new Socket(this._ip, this._port);
             System.out.println("Connected to server");
 
             this._out = new ObjectOutputStream(this._socket.getOutputStream());
             this._in = new ObjectInputStream(this._socket.getInputStream());
+
             getUsersListFromServer();
 
         }catch(IOException e){
@@ -54,16 +60,18 @@ public class Client {
             Object data = this._in.readObject();
             if(data instanceof ArrayList){
                 this._users = (ArrayList<User>)data;
-                
-                // to do: received list of users. move it to display
             }
 
             else{
-                System.err.println("Object received from server is not of type 'User'");
+                System.err.println("Object received from server is not of type 'User List'");
             }
         }catch(Exception e){
             System.err.println("Error receiving data from server");
             System.err.println(e);
         }
+    }
+
+    public ArrayList<User> getUsers(){
+        return this._users;
     }
 }

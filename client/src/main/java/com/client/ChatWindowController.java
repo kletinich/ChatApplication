@@ -7,7 +7,7 @@ import javafx.scene.layout.VBox;
 /*
  * A controller for the main app window that controls all the sub-windows
  */
-public class ChatWindowController {
+public class ChatWindowController extends Controller{
 
     @FXML
     private VBox loginBox;

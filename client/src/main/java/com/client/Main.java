@@ -16,13 +16,14 @@ public class Main extends Application{
         Scene scene = new Scene(root);
         stage.setTitle("How you doin'?");
         stage.setScene(scene);
-        this._stage = stage;
+        Main._stage = stage;
         stage.show();
     }
     public static void main(String[] args) {
-        Client client = new Client();
-        client.connectToServer();
-
+        // init the client to be accessed through all controllers
+        Controller.initClient();
+        
+        // launch the main window
         launch(args);
     }
 

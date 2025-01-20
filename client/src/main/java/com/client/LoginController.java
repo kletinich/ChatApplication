@@ -6,7 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 // A controller for the login phase of the chat app
-public class LoginController {
+public class LoginController extends Controller{
     @FXML
     private TextField username_login_text_field;
 
