@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="login_view" alignment="CENTER" prefHeight="200.0" prefWidth="245.0" stylesheets="@values/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.LoginController">
+<VBox fx:id="login_view" alignment="CENTER" prefHeight="200.0" prefWidth="245.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.LoginController">
    <children>
       <Label alignment="CENTER" prefHeight="17.0" prefWidth="265.0" text="Login" textAlignment="CENTER">
          <VBox.margin>

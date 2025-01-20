@@ -32,8 +32,6 @@ public class PostLoginDashboardController extends Controller{
 
     @FXML
     public void chatIconClicked(){
-        System.out.println("Opening chats view");
-
         /*
          * to do:
          * 1. set the chats view to visible.

@@ -46,12 +46,42 @@ public class Client {
             this._out = new ObjectOutputStream(this._socket.getOutputStream());
             this._in = new ObjectInputStream(this._socket.getInputStream());
 
-            getUsersListFromServer();
-
         }catch(IOException e){
             System.err.println("Can't connect to server");
             System.exit(1);
         }
+    }
+
+    /*
+     * Send a request to the server
+     */
+    public void proccessRequest(int requestCode){
+        int responseCode = 0;
+
+        switch(requestCode){
+
+            case Codes.LOGIN_REQUEST:
+                if(Controller.getMe() == null){
+                    System.err.println("Me is not initialized");
+                }
+                else{
+                    responseCode = registerRequest(Controller.getMe());
+
+                    // to do: proccess code
+                }
+
+                break;
+        }
+    }
+
+    /*
+     * Send register request to the server
+     */
+    public int registerRequest(ThisUser me){
+
+        // to do: send request to server
+        
+        return 0;
     }
 
     @SuppressWarnings("unchecked")
