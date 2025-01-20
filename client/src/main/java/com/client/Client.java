@@ -5,7 +5,7 @@ import java.io.ObjectOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
-import com.classes.*; // bug: cant access elements even though i have the pom
+import com.classes.*; 
 
 
 public class Client {

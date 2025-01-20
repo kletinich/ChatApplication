@@ -4,6 +4,7 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "c:\\Users\\Daniel\\Desktop\\projects\\ChatApplication\\Shared\\Shared.jar",
-        "c:\\Users\\Daniel\\Desktop\\projects\\ChatApplication\\CommonClasses\\CommonClasses.jar"
+        "c:\\Users\\Daniel\\Desktop\\projects\\ChatApplication\\CommonClasses\\CommonClasses.jar",
+        "c:\\Users\\Daniel\\Desktop\\projects\\ChatApplication\\CommonClasses\\classes\\CommonClasses.jar"
     ]
 }
