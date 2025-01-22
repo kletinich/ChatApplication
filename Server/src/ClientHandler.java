@@ -23,7 +23,7 @@ public class ClientHandler extends Thread{
         this._socket = socket;
 
         this._users = users;
-
+        
         try {
             this._out = new ObjectOutputStream(this._socket.getOutputStream());
             this._in = new ObjectInputStream(this._socket.getInputStream());

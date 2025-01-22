@@ -10,7 +10,6 @@ public class Controller {
     protected static Client _client;
     protected static ThisUser _me;
 
-
     public static void initClient(){
         _client = new Client();
         _me = null;
@@ -19,7 +18,7 @@ public class Controller {
     public static Client getClient(){
         return _client;
     }
-
+    
     public static ThisUser getMe(){
         return _me;
     }
