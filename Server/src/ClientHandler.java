@@ -42,7 +42,7 @@ public class ClientHandler extends Thread{
         TreeMap<String, Object> data = receiveRequest();
         TreeMap<String, Object> responseData = RequestProcessor.processRequest(data);
         
-        // to do: do something with the response code. Create TreeMap to process a response
+        sendResponse(responseData);
 
         closeConnection();
     }
@@ -61,6 +61,15 @@ public class ClientHandler extends Thread{
         }
 
         return null;
+    }
+
+    // send response to client
+    public void sendResponse(TreeMap<String, Object> responseData){
+        try {
+            this._out.writeObject(responseData);
+        } catch (IOException e) {
+            System.err.println("Error sending data to client");
+        }
     }
 
     /*

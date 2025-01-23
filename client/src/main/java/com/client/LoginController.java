@@ -39,6 +39,7 @@ public class LoginController extends Controller{
         else{
             _me = new ThisUser(username_login_text_field.getText(), password_login_text_field.getText() ,"", "");
             _client.proccessRequest(Codes.LOGIN_REQUEST);
+            _client.receiveResponse();
         }
     }
 }
