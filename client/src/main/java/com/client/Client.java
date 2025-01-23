@@ -70,7 +70,7 @@ public class Client {
                     System.err.println("Me is not initialized");
                     return;
                 }
-
+                
                 data = registerRequest(Controller.getMe());
                 sendRequest(data);
 

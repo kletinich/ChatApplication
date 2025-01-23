@@ -5,7 +5,7 @@ import java.util.TreeMap;
 /*
  * Packs and unpacks responses
  */
-abstract class ResponsePack {
+public abstract class ResponsePack {
 
     //pack a general resonse. Send to the right pack functions. 
     public static TreeMap<String, Object> pack(int responseCode, Object... args){
