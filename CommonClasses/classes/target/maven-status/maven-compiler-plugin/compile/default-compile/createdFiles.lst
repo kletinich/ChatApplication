@@ -1,5 +1,6 @@
 com\classes\ThisUser.class
 com\classes\RequestPack.class
+com\classes\ResponsePack.class
 com\classes\Codes.class
 com\classes\Main.class
 com\classes\User.class

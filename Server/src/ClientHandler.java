@@ -14,7 +14,7 @@ import com.classes.*;
 public class ClientHandler extends Thread{
     private Server _server;
     private Socket _socket;
-
+    
     private ObjectInputStream _in;
     private ObjectOutput _out;
 
@@ -36,12 +36,12 @@ public class ClientHandler extends Thread{
 
     @Override
     public void run(){
-
+    
         // to do: later add while(true loop until closing connection)
 
         TreeMap<String, Object> data = receiveRequest();
         int responseCode = RequestProcessor.processRequest(data);
-
+        
         // to do: do something with the response code. Create TreeMap to process a response
 
         closeConnection();
@@ -72,6 +72,7 @@ public class ClientHandler extends Thread{
         }catch(IOException e){
             System.err.println("Failed to send list of users to client");
         }
+    
     }
 
     /*

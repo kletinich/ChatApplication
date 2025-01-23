@@ -62,9 +62,9 @@ public class Client {
         TreeMap<String, Object> data;
         
         connectToServer();
-
+        
         switch(requestCode){
-
+            
             case Codes.LOGIN_REQUEST:
                 if(Controller.getMe() == null){
                     System.err.println("Me is not initialized");
