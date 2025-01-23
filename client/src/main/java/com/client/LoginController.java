@@ -1,5 +1,8 @@
 package com.client;
 
+import com.classes.Codes;
+import com.classes.ThisUser;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -34,7 +37,8 @@ public class LoginController extends Controller{
         }
 
         else{
-            System.out.println("OK");
+            _me = new ThisUser(username_login_text_field.getText(), password_login_text_field.getText() ,"", "");
+            _client.proccessRequest(Codes.LOGIN_REQUEST);
         }
     }
 }

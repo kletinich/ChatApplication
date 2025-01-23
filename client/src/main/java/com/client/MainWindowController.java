@@ -19,9 +19,7 @@ public class MainWindowController extends Controller{
     public void initialize(){
 
         // temp because no login phase for this version
-        this.loginBox.setVisible(false);
-        this.postLoginDashboard.setVisible(true);
+        this.loginBox.setVisible(true);
+        this.postLoginDashboard.setVisible(false);
     }
- 
-   
 }

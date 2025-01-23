@@ -19,7 +19,7 @@ public abstract class RequestPack {
                         throw new IllegalArgumentException("Invalid arguments sent for login request. Excpected: (String, String).");
                     }
 
-                    return packLoginRequest(requestCode, (String)args[1], (String)args[2]);
+                    return packLoginRequest(requestCode, (String)args[0], (String)args[1]);
 
                 default:
                     throw new IllegalArgumentException("Invalid request code: " + requestCode);

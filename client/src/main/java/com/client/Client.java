@@ -5,6 +5,8 @@ import java.io.ObjectOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.TreeMap;
+
 import com.classes.*; 
 
 
@@ -57,18 +59,20 @@ public class Client {
      */
     public void proccessRequest(int requestCode){
         int responseCode = 0;
+        TreeMap<String, Object> data;
+        
+        connectToServer();
 
         switch(requestCode){
 
             case Codes.LOGIN_REQUEST:
                 if(Controller.getMe() == null){
                     System.err.println("Me is not initialized");
+                    return;
                 }
-                else{
-                    responseCode = registerRequest(Controller.getMe());
 
-                    // to do: proccess code
-                }
+                data = registerRequest(Controller.getMe());
+                sendRequest(data);
 
                 break;
         }
@@ -77,11 +81,21 @@ public class Client {
     /*
      * Send register request to the server
      */
-    public int registerRequest(ThisUser me){
+    public TreeMap<String, Object> registerRequest(ThisUser me){
 
-        // to do: send request to server
-        
-        return 0;
+        String username = me.getUsername();
+        String password = me.getPassword();
+
+        return RequestPack.pack(Codes.LOGIN_REQUEST, username, password);
+    }
+
+    // Send the packed request data to the server
+    public void sendRequest(TreeMap<String, Object> data){
+        try {
+            this._out.writeObject(data);
+        } catch (IOException e) {
+            System.out.println("Error sending data to server");
+        }
     }
 
     @SuppressWarnings("unchecked")

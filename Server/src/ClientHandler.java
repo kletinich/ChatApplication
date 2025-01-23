@@ -4,6 +4,8 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.TreeMap;
+
 import com.classes.*;
 
 /*
@@ -34,7 +36,29 @@ public class ClientHandler extends Thread{
 
     @Override
     public void run(){
+
+        // to do: later add while(true loop until closing connection)
+
+        TreeMap<String, Object> data = receiveRequest();
+        proccessRequest(data);
+
         closeConnection();
+    }
+
+    // wait for requests from the client
+    public TreeMap<String, Object> receiveRequest(){
+        
+        try {
+            TreeMap<String,Object> data = (TreeMap<String, Object>) this._in.readObject();
+            return data;
+
+        } catch (ClassNotFoundException e) {
+            System.err.println("Class not found");
+        } catch (IOException e) {
+            System.err.println("Error receiving data from client");
+        }
+
+        return null;
     }
 
     /*
@@ -51,13 +75,26 @@ public class ClientHandler extends Thread{
     /*
      * Proccess the request of the client
      */
-    public void proccessRequest(int requestCode){
+    public void proccessRequest(TreeMap<String, Object> data){
 
-        // user request for login
-        switch(requestCode){
-            case Codes.LOGIN_REQUEST:
-            break;
+        boolean isValid = RequestPack.isValidRequest(data);
+
+        if(isValid){
+
+            //user request for login
+            switch((int)data.get("request_code")){
+                case Codes.LOGIN_REQUEST:
+                    proccessLoginRequest(data);
+                    break;
+            }
         }
+    }
+
+    public void proccessLoginRequest(TreeMap<String, Object> data){
+        String username = (String)data.get("username");
+        String password = (String)data.get("password");
+
+        System.out.println(username + " " + password);
     }
 
     /*
