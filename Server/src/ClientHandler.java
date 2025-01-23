@@ -40,7 +40,7 @@ public class ClientHandler extends Thread{
         // to do: later add while(true loop until closing connection)
 
         TreeMap<String, Object> data = receiveRequest();
-        int responseCode = RequestProcessor.processRequest(data);
+        TreeMap<String, Object> responseData = RequestProcessor.processRequest(data);
         
         // to do: do something with the response code. Create TreeMap to process a response
 

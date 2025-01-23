@@ -80,8 +80,7 @@ public class UserList {
      */
     public boolean isRegistered(String username, String password){
         for(ThisUser user: this._users){
-            System.out.println("This: " + user.getUsername() + " other: " + username);
-            System.out.println("This: " + user.getPassword() + " other: " + password);
+
             if(user.getUsername().equals(username)){
                 if(user.getPassword().equals(password)){
                     return true;
@@ -92,5 +91,25 @@ public class UserList {
         }
 
         return false;
+    }
+
+    public String getFirstNameByUsername(String username){
+        for(ThisUser user: this._users){
+            if(user.getUsername().equals(username)){
+                return user.getFirstName();
+            }
+        }
+
+        return null;
+    }
+
+    public String getLastNameByUsername(String username){
+        for(ThisUser user: this._users){
+            if(user.getUsername().equals(username)){
+                return user.getLastName();
+            }
+        }
+
+        return null;
     }
 }
