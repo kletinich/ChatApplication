@@ -40,7 +40,7 @@ public class ClientHandler extends Thread{
         // to do: later add while(true loop until closing connection)
 
         TreeMap<String, Object> data = receiveRequest();
-        proccessRequest(data);
+        RequestProcessor.processRequest(data);
 
         closeConnection();
     }
@@ -70,31 +70,6 @@ public class ClientHandler extends Thread{
         }catch(IOException e){
             System.err.println("Failed to send list of users to client");
         }
-    }
-
-    /*
-     * Proccess the request of the client
-     */
-    public void proccessRequest(TreeMap<String, Object> data){
-
-        boolean isValid = RequestPack.isValidRequest(data);
-
-        if(isValid){
-
-            //user request for login
-            switch((int)data.get("request_code")){
-                case Codes.LOGIN_REQUEST:
-                    proccessLoginRequest(data);
-                    break;
-            }
-        }
-    }
-
-    public void proccessLoginRequest(TreeMap<String, Object> data){
-        String username = (String)data.get("username");
-        String password = (String)data.get("password");
-
-        System.out.println(username + " " + password);
     }
 
     /*

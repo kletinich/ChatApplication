@@ -10,6 +10,8 @@ public class Manager {
     public Manager(){
         this._server = new Server();
         this._users = new UserList();
+
+        RequestProcessor.initManager(this);
     }
 
     public void start(){
@@ -22,5 +24,13 @@ public class Manager {
         this._server.closeServer();
 
         FileHandler.writeUsersToFile(this._users.getUsersWithPassword());
+    }
+
+    public Server getServer(){
+        return this._server;
+    }
+
+    public UserList getUsers(){
+        return this._users;
     }
 }

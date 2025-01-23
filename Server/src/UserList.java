@@ -74,4 +74,23 @@ public class UserList {
 
         return false;
     }
+
+    /*
+     * Check if a given username and passowrd belong to a registered user
+     */
+    public boolean isRegistered(String username, String password){
+        for(ThisUser user: this._users){
+            System.out.println("This: " + user.getUsername() + " other: " + username);
+            System.out.println("This: " + user.getPassword() + " other: " + password);
+            if(user.getUsername().equals(username)){
+                if(user.getPassword().equals(password)){
+                    return true;
+                }
+
+                return false;
+            }
+        }
+
+        return false;
+    }
 }

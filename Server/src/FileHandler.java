@@ -50,7 +50,7 @@ public class FileHandler {
                 String username = parsedInfo[2];
                 String password = parsedInfo[3];
                 
-                users.add(new ThisUser(firstName, lastName, username, password));
+                users.add(new ThisUser(username, password, firstName, lastName));
             }
 
             usersReader.close();
