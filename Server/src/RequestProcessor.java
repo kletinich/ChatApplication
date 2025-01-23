@@ -26,18 +26,20 @@ public abstract class RequestProcessor {
         boolean isValid = RequestPack.isValidRequest(data);
 
         if(isValid){
-
-            //user request for login
             switch((int)data.get("request_code")){
+
+                // user request for login
                 case Codes.LOGIN_REQUEST:
                     return processLoginRequest(data);
 
+                // request is not part of the list of known requests
                 default:
-                    return -1; // to do: add code for not valid request code
+                    return Codes.UNKNOWN_REQUEST;
             }
         }
 
-        return -1; // to do: add code for not valid request
+        // not a valid request format
+        return Codes.NOT_VALID_REQUEST;
     }
 
     /*
