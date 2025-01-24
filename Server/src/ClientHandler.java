@@ -8,9 +8,16 @@ import java.util.TreeMap;
 
 import com.classes.*;
 
-/*
- * Handles one connection with one clientHa
- */
+
+
+/******************************************************************
+ *                                                                *
+ *                Handles requests from one client                *
+ *     Receives requests, processes them and send responses       *
+ *                                                                *
+ *****************************************************************/
+
+
 public class ClientHandler extends Thread{
     private Server _server;             // Server class
     private Socket _socket;             // this socket
