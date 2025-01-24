@@ -102,7 +102,6 @@ public class Client {
     public void receiveResponse(){
         try {
             TreeMap<String, Object> responseData = (TreeMap<String, Object>) this._in.readObject();
-            System.out.println(responseData.toString());
         } catch (IOException e) {
             System.out.println("Error receiving data from server");
         } catch (ClassNotFoundException e) {

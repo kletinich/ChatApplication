@@ -1,29 +1,43 @@
-import com.classes.*;
 
-/*
- * Manages the server side
- */
+/************************************************************
+ *                                                          *
+ *                   Manages the server side                *
+ *              Contains the server, list of users.         *
+ *                                                          *
+ ***********************************************************/
+
+ 
 public class Manager {
-    private Server _server;
-    private UserList _users;
+    private Server _server;         // The server
+    private UserList _users;        // list of users
 
     public Manager(){
         this._server = new Server();
         this._users = new UserList();
 
-        RequestProcessor.initManager(this);
+        // Send the manager to the requestProccessor to have access to the server and user list
+        RequestProcessor.initManager(this); 
     }
 
+    /*
+     * Start the manager:
+     * Load the users from the save file.
+     * Start the server.
+     */
     public void start(){
         this._users.copyUsers(FileHandler.readUsersFromFile());
         this._server.setUsersList(this._users);
         this._server.startServer();
     }
 
+    /*
+     * Close the manager:
+     * Save the users to the save file.
+     * Close the server.
+     */
     public void closeProgram(){
-        this._server.closeServer();
-
         FileHandler.writeUsersToFile(this._users.getUsersWithPassword());
+        this._server.closeServer();
     }
 
     public Server getServer(){

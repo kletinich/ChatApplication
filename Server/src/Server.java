@@ -2,29 +2,35 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import com.classes.*;
 
 import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-/*
- * Handles socket connections from users.
- * Each connected user is handled by ClientHandler class
- */
+
+/************************************************************************
+ *                                                                      *
+ *              Handles socket connections from users.                  *
+ *      Each connected user is handled by ClientHandler class           *
+ *                                                                      *
+ ***********************************************************************/
+
+
 public class Server {
-    public static final String DEFAULT_IP_ADDRESS = "127.0.0.1";
+    public static final String DEFAULT_IP_ADDRESS = "127.0.0.1";  
     public static final int DEFAULT_PORT = 8080;
     public static final int DEFAULT_MAX_NUM_OF_CONNECTIONS = 10;
 
-    private String _ipAddress;
-    private int _port;
+    private String _ipAddress;                  // IP address of the server
+    private int _port;                          // Port of the server
 
-    private ServerSocket _server;
-    private Socket _socket;
+    private ServerSocket _server;               // The server socket
 
-    private Vector<ClientHandler> _clients;
-    private int _maxNumOfConnections;
+    private Vector<ClientHandler> _clients;     // Connected clients
+    private ExecutorService _threadPool;        // Thread for each connected client
+    private int _maxNumOfConnections;           // Maximum ammount of connected clients
 
-    private UserList _users;
+    private UserList _users;                    // List of registered users
 
     public Server(){
         this(DEFAULT_IP_ADDRESS, DEFAULT_PORT, DEFAULT_MAX_NUM_OF_CONNECTIONS);
@@ -38,6 +44,7 @@ public class Server {
         this._users = null;
 
         this._clients = new Vector<>(this._maxNumOfConnections);
+        this._threadPool = Executors.newFixedThreadPool(this._maxNumOfConnections);
     }
 
     /*
@@ -49,18 +56,24 @@ public class Server {
     public void startServer(){
         try{
             InetAddress bindAddress = InetAddress.getByName(this._ipAddress);
+            Socket socket;
+            ClientHandler newClient;
 
+            // Start the server and listen for connections
             this._server = new ServerSocket(this._port, this._maxNumOfConnections, bindAddress);
-            System.out.println("Server started at IP: " + this._ipAddress + " on port: " + this._port);
+            System.out.println("Server listening at IP: " + this._ipAddress + " on port: " + this._port);
 
             while(true){
-                this._socket = this._server.accept();
-                System.out.println("Accepted connection with:" + this._socket.getInetAddress().getHostAddress());
+
+                // Accept connection with some client
+                socket = this._server.accept();
+                System.out.println("Accepted connection with:" + socket.getInetAddress().getHostAddress());
                 
-                ClientHandler newClient = new ClientHandler(this, this._socket, this._users.getUsersWithoutPassword());
+                // Handle the clients request in ClientHandler class
+                newClient = new ClientHandler(this, socket, this._users.getUsersWithoutPassword());
                 this._clients.add(newClient);
-        
-                newClient.start();
+                this._threadPool.execute(newClient);
+                //newClient.start();
             }
 
         }catch(IOException e){
@@ -79,6 +92,8 @@ public class Server {
         }
 
         this._clients.removeAllElements();
+
+        this._threadPool.shutdown();
     }
 
     /*
