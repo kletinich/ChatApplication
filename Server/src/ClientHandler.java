@@ -12,13 +12,13 @@ import com.classes.*;
  * Handles one connection with one clientHa
  */
 public class ClientHandler extends Thread{
-    private Server _server;
-    private Socket _socket;
+    private Server _server;             // Server class
+    private Socket _socket;             // this socket
     
-    private ObjectInputStream _in;
-    private ObjectOutput _out;
+    private ObjectInputStream _in;      // reading objects from the client
+    private ObjectOutput _out;          // writing objects to the client
 
-    private ArrayList<User> _users;
+    private ArrayList<User> _users;     // list of users without their password
 
     public ClientHandler(Server server, Socket socket, ArrayList<User> users){
         this._server = server;
@@ -29,6 +29,7 @@ public class ClientHandler extends Thread{
         try {
             this._out = new ObjectOutputStream(this._socket.getOutputStream());
             this._in = new ObjectInputStream(this._socket.getInputStream());
+
         } catch (IOException e) {
             System.err.println("Error creating input or output stream");
         }
@@ -36,14 +37,13 @@ public class ClientHandler extends Thread{
 
     @Override
     public void run(){
-    
-        // to do: later add while(true loop until closing connection)
 
+        // receive a request from the client and process it
         TreeMap<String, Object> data = receiveRequest();
         TreeMap<String, Object> responseData = RequestProcessor.processRequest(data);
         
+        // send the response of the request back to the client and close
         sendResponse(responseData);
-
         closeConnection();
     }
 
@@ -51,6 +51,7 @@ public class ClientHandler extends Thread{
     public TreeMap<String, Object> receiveRequest(){
         
         try {
+            @SuppressWarnings("unchecked")
             TreeMap<String,Object> data = (TreeMap<String, Object>) this._in.readObject();
             return data;
 
@@ -72,9 +73,8 @@ public class ClientHandler extends Thread{
         }
     }
 
-    /*
-     * send users list to the client
-     */
+    
+    //send users list to the client
     public void sendUsersListToClient(){
         try{
             this._out.writeObject(this._users);
@@ -93,6 +93,7 @@ public class ClientHandler extends Thread{
             this._in.close();
             this._socket.close();
             System.out.println("Closed connection");
+
         } catch (IOException e) {
             System.err.println(this._socket.getInetAddress().getHostAddress() + ":");
             System.err.println("Failed to close input stream or socket");
