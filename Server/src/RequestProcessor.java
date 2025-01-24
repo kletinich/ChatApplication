@@ -4,9 +4,15 @@ import com.classes.Codes;
 import com.classes.RequestPack;
 
 
-/*
- * Process requests from the user
- */
+
+/****************************************************
+ *                                                  *
+ *          Process requests from the user          *
+ *                                                  *
+ ***************************************************/
+
+
+
 public abstract class RequestProcessor {
 
     private static Manager _manager = null;
@@ -23,9 +29,11 @@ public abstract class RequestProcessor {
      */
     public static TreeMap<String, Object> processRequest(TreeMap<String, Object> data){
 
+        // check if request is valid by format
         boolean isValid = RequestPack.isValidRequest(data);
         TreeMap<String, Object> responseData = null;
 
+        // valid request format
         if(isValid){
 
             switch((int)data.get("request_code")){
@@ -49,22 +57,26 @@ public abstract class RequestProcessor {
     }
 
     /*
-     * Process A login request
-     * Return 
+     * Process A login request.
+     * Return a response treeMap.
+     * Assumption - data is valid
      */
-    private static TreeMap<String, Object> processLoginRequest(TreeMap<String, Object> data){
-        String username = (String)data.get("username");
-        String password = (String)data.get("password");
-
-        boolean isRegistered = _manager.getUsers().isRegistered(username, password);
-
+    private static TreeMap<String, Object> processLoginRequest(TreeMap<String, Object> validData){
         TreeMap<String, Object> responseData = new TreeMap<>();
 
+        String username = (String)validData.get("username");
+        String password = (String)validData.get("password");
+
+        // check if user is registered
+        boolean isRegistered = _manager.getUsers().isRegistered(username, password);
+
+        // user is not registered
         if(!isRegistered){
             responseData.put("response_code", Codes.LOGIN_FAILED_RESPONSE);
             return responseData;
         }
 
+        // user is registered, return the full user data
         responseData.put("response_code", Codes.LOGIN_SUCCESS_RESPONSE);
         responseData.put("first_name", _manager.getUsers().getFirstNameByUsername(username));
         responseData.put("last_name", _manager.getUsers().getLastNameByUsername(username));
