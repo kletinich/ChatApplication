@@ -1,9 +1,16 @@
 import java.util.ArrayList;
 import com.classes.*;
 
-/*
- * A container for users that registered to the app
- */
+
+
+/****************************************************************
+ *                                                              *
+ *       A container for users that registered to the app       *
+ *                                                              *
+ ***************************************************************/
+
+
+
 public class UserList {
     private ArrayList<ThisUser> _users;
     
@@ -14,16 +21,16 @@ public class UserList {
         this._numOfUsers = 0;
     }
 
-    /*
-     * Get the list of users with password (for server usage)
-     */
+    public int getSize(){
+        return this._numOfUsers;
+    }
+
+    // Get the list of users with password (for server usage)
     public ArrayList<ThisUser> getUsersWithPassword(){
         return this._users;
     }
 
-    /*
-     * Get the list of users without password (for client usage)
-     */
+    // Get the list of users without password (for client usage)
     public ArrayList<User> getUsersWithoutPassword(){
         ArrayList<User> usersWithNoPassword = new ArrayList<>();
     
@@ -34,9 +41,7 @@ public class UserList {
         return usersWithNoPassword;
     }
 
-    /*
-     * copy all the users data to this class
-     */
+    // copy all the users data to this class
     public void copyUsers(ArrayList<ThisUser> users){
         this._users = users;
     }
@@ -75,9 +80,7 @@ public class UserList {
         return false;
     }
 
-    /*
-     * Check if a given username and passowrd belong to a registered user
-     */
+    // Check if a given username and passowrd belong to a registered user
     public boolean isRegistered(String username, String password){
         for(ThisUser user: this._users){
 
@@ -93,6 +96,7 @@ public class UserList {
         return false;
     }
 
+    // Return a user first name by username. if user doesn't exist, return null
     public String getFirstNameByUsername(String username){
         for(ThisUser user: this._users){
             if(user.getUsername().equals(username)){
@@ -103,6 +107,7 @@ public class UserList {
         return null;
     }
 
+        // Return a user last name by username. if user doesn't exist, return null
     public String getLastNameByUsername(String username){
         for(ThisUser user: this._users){
             if(user.getUsername().equals(username)){
