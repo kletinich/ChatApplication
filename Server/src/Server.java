@@ -47,24 +47,40 @@ public class Server {
         this._threadPool = Executors.newFixedThreadPool(this._maxNumOfConnections);
     }
 
-    /*
-     * Start the server:
-     * Bind to ip address
-     * listen to clients
-     * client connects - pass the handle to the ClientHandler
-     */
+    public void setUsersList(UserList users){
+        this._users = users;
+    }
+
+    // Start the server and listen to binded address and port
     public void startServer(){
         try{
             InetAddress bindAddress = InetAddress.getByName(this._ipAddress);
-            Socket socket;
-            ClientHandler newClient;
 
             // Start the server and listen for connections
             this._server = new ServerSocket(this._port, this._maxNumOfConnections, bindAddress);
             System.out.println("Server listening at IP: " + this._ipAddress + " on port: " + this._port);
 
-            while(true){
+        }catch(IOException e){
+            System.err.println("Error creating server");
+            System.exit(1);
+        }
 
+        // listen for connections
+        listen();
+    }
+
+    /*
+     * Accept connections with clients:
+     * Pass the request handle to an instance of ClientHandler class
+     * add the instance of ClientHandler class to the thread pool
+     * Run the new client thread by executing it
+     */
+    public void listen(){
+        Socket socket;
+        ClientHandler newClient;
+
+        while(true){
+            try{
                 // Accept connection with some client
                 socket = this._server.accept();
                 System.out.println("Accepted connection with:" + socket.getInetAddress().getHostAddress());
@@ -73,11 +89,10 @@ public class Server {
                 newClient = new ClientHandler(this, socket, this._users.getUsersWithoutPassword());
                 this._clients.add(newClient);
                 this._threadPool.execute(newClient);
-                //newClient.start();
-            }
 
-        }catch(IOException e){
-            System.err.println("Error creating server");
+            }catch(IOException e){
+                System.out.println("Error connecting to client");
+            }
         }
     }
 
@@ -85,6 +100,7 @@ public class Server {
      * Iterating over the connected clients
      * Close their connection
      * Remove them from the list of connected clients
+     * Shutdown the thread pool
      */
     public void closeClients(){
         for(ClientHandler client: this._clients){
@@ -93,7 +109,9 @@ public class Server {
 
         this._clients.removeAllElements();
 
-        this._threadPool.shutdown();
+        if(this._threadPool != null){
+            this._threadPool.shutdown();
+        }
     }
 
     /*
@@ -102,14 +120,11 @@ public class Server {
      */
     public void closeServer(){
         this.closeClients();
+
         try {
             this._server.close();
         } catch (IOException e) {
-            System.err.println("Failed  to close server");
+            System.err.println("Failed to close server");
         }
-    }
-
-    public void setUsersList(UserList users){
-        this._users = users;
     }
 }
