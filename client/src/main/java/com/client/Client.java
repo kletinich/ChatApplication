@@ -99,14 +99,17 @@ public class Client {
     }
 
     // receive a response from the server
-    public void receiveResponse(){
+    public TreeMap<String, Object> receiveResponse(){
         try {
             TreeMap<String, Object> responseData = (TreeMap<String, Object>) this._in.readObject();
+            return responseData;
         } catch (IOException e) {
             System.out.println("Error receiving data from server");
         } catch (ClassNotFoundException e) {
             System.err.println("Class not found");
         }
+
+        return null;
     }
 
     @SuppressWarnings("unchecked")

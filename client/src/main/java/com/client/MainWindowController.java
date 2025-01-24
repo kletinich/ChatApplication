@@ -17,9 +17,18 @@ public class MainWindowController extends Controller{
 
     @FXML
     public void initialize(){
-
-        // temp because no login phase for this version
-        this.loginBox.setVisible(true);
-        this.postLoginDashboard.setVisible(false);
+        loginBox.setVisible(true);
+        postLoginDashboard.setVisible(false);
     }
+
+    public void showLoginWindow(){
+        loginBox.setVisible(true);
+        postLoginDashboard.setVisible(false);
+    }
+
+    public void showPostLoginDashboardWindow(){
+        loginBox.setVisible(false);
+        postLoginDashboard.setVisible(true);
+    }
+
 }

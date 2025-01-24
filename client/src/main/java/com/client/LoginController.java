@@ -1,5 +1,7 @@
 package com.client;
 
+import java.util.TreeMap;
+
 import com.classes.Codes;
 import com.classes.ThisUser;
 
@@ -25,12 +27,17 @@ public class LoginController extends Controller{
     @FXML
     private Label register_label;
 
+    private static TreeMap<String, Object> _windows;
+
     @FXML
     public void initialize(){
     }
 
     @FXML
     public void login(){
+
+        // TODO: write a better code, now the code is for testing
+
         if(username_login_text_field.getText().trim().isEmpty() || 
             password_login_text_field.getText().trim().isEmpty()){
             System.err.println("Empty textField");
@@ -39,7 +46,23 @@ public class LoginController extends Controller{
         else{
             _me = new ThisUser(username_login_text_field.getText(), password_login_text_field.getText() ,"", "");
             _client.proccessRequest(Codes.LOGIN_REQUEST);
-            _client.receiveResponse();
+            TreeMap<String, Object> response = _client.receiveResponse();
+
+            if((int)response.get("response_code") == Codes.LOGIN_SUCCESS_RESPONSE){
+                String firstName = (String)response.get("first_name");
+                String lastName = (String)response.get("last_name");
+                
+                _me.setFirstName(firstName);
+                _me.setLastName(lastName);
+
+                System.out.println("Welcome " + firstName + " " + lastName);
+
+                _mainWindow.showPostLoginDashboardWindow();
+            }
+
+            else if((int)response.get("response_code") == Codes.LOGIN_FAILED_RESPONSE){
+                System.out.println("Login fail");
+            }
         }
     }
 }
