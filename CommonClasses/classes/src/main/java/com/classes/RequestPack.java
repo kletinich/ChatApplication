@@ -16,10 +16,18 @@ public abstract class RequestPack {
                 // user wants to login to the server
                 case Codes.LOGIN_REQUEST:
                     if(args.length != 2 || !(args[0] instanceof String) || !(args[1] instanceof String)){
-                        throw new IllegalArgumentException("Invalid arguments sent for login request. Excpected: (String, String).");
+                        throw new IllegalArgumentException("Invalid arguments sent for login request. Excpected: username - String, password - String.");
                     }
 
                     return packLoginRequest(requestCode, (String)args[0], (String)args[1]);
+
+                // user wants to get list of other users from the server
+                case Codes.GET_USERS_REQUEST:
+                    if(args.length != 1 || !(args[0] instanceof String)){
+                        throw new IllegalArgumentException("Invalid arguments sent for login request. Excpected: username - String.");
+                    }
+
+                    return packGetUsersRequest(requestCode, (String) args[0]);
 
                 default:
                     throw new IllegalArgumentException("Invalid request code: " + requestCode);
@@ -96,6 +104,28 @@ public abstract class RequestPack {
         return true;
      }
 
+     // check if a packed get users request is valid
+     private static boolean isValidGetUsersRequest(TreeMap<String, Object> request){
+        if(request.size() != 2){
+            System.err.println("Not a valid request");
+            return false;
+        }
+
+        Object check = request.get("username");
+
+        if(check == null){
+            System.err.println("No username was sent");
+            return false;
+        }
+
+        if(!(check instanceof String)){
+            System.err.println("Not a valid username");
+            return false;
+        }
+
+        return true;
+     }
+
 
     /**********************************************************
      *                                                        * 
@@ -105,15 +135,23 @@ public abstract class RequestPack {
      *                                                        *
      *********************************************************/
 
-    /*
-     * Pack a login request
-     */
+    // Pack a login request
     private  static TreeMap<String, Object> packLoginRequest(int requestCode, String username, String password){
         TreeMap<String, Object> request = new TreeMap<>();
 
         request.put("request_code", requestCode);
         request.put("username", username);
         request.put("password", password);
+
+        return request;
+    }
+
+    // Pack get users request
+    private  static TreeMap<String, Object> packGetUsersRequest(int requestCode, String username){
+        TreeMap<String, Object> request = new TreeMap<>();
+
+        request.put("request_code", requestCode);
+        request.put("username", username);
 
         return request;
     }

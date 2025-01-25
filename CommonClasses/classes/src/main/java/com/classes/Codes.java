@@ -13,6 +13,8 @@ public abstract class Codes {
 
     public static final int LOGIN_REQUEST = 20;
 
+    public static final int GET_USERS_REQUEST = 30;
+
 
     /*
      * Response codes
@@ -23,4 +25,8 @@ public abstract class Codes {
 
     public static final int LOGIN_SUCCESS_RESPONSE = 21;
     public static final int LOGIN_FAILED_RESPONSE = 22;
+
+    public static final int GET_USERS_SUCCESS_RESPONSE = 31;
+    public static final int GET_USERS_FAIL_RESPONSE = 32;
+
 }
