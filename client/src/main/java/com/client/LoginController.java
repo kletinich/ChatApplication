@@ -27,7 +27,14 @@ public class LoginController extends Controller{
     @FXML
     private Label register_label;
 
-    private static TreeMap<String, Object> _windows;
+    @FXML
+    private Label username_error_label;
+
+    @FXML
+    private Label password_error_label;
+
+    @FXML
+    private Label login_error_label;
 
     @FXML
     public void initialize(){
@@ -35,33 +42,59 @@ public class LoginController extends Controller{
 
     @FXML
     public void login(){
-
-        // TODO: write a better code, now the code is for testing
-
-        if(username_login_text_field.getText().trim().isEmpty() || 
-            password_login_text_field.getText().trim().isEmpty()){
-            System.err.println("Empty textField");
+        if(username_login_text_field.getText().trim().isEmpty()){
+            this.username_error_label.setText("Empty field");
         }
 
-        else{
+        if(password_login_text_field.getText().trim().isEmpty()){
+            this.password_error_label.setText("Empty field");
+        }
+
+        // can process the login request
+        if(!username_login_text_field.getText().trim().isEmpty() && !username_login_text_field.getText().trim().isEmpty()){
+            this.username_error_label.setText("");
+            this.password_error_label.setText("");
+
+            // process the request and receive response from the server
             _me = new ThisUser(username_login_text_field.getText(), password_login_text_field.getText() ,"", "");
             _client.proccessRequest(Codes.LOGIN_REQUEST);
             TreeMap<String, Object> response = _client.receiveResponse();
+            int responseCode = (int)response.get("response_code");
 
-            if((int)response.get("response_code") == Codes.LOGIN_SUCCESS_RESPONSE){
-                String firstName = (String)response.get("first_name");
-                String lastName = (String)response.get("last_name");
-                
-                _me.setFirstName(firstName);
-                _me.setLastName(lastName);
+            switch(responseCode){
 
-                System.out.println("Welcome " + firstName + " " + lastName);
+                // Login success
+                case Codes.LOGIN_SUCCESS_RESPONSE:
+                    String firstName = (String)response.get("first_name");
+                    String lastName = (String)response.get("last_name");
+                    
+                    _me.setFirstName(firstName);
+                    _me.setLastName(lastName);
 
-                _mainWindow.showPostLoginDashboardWindow();
-            }
+                    System.out.println("Welcome " + firstName + " " + lastName);
 
-            else if((int)response.get("response_code") == Codes.LOGIN_FAILED_RESPONSE){
-                System.out.println("Login fail");
+                    _mainWindow.showPostLoginDashboardWindow();
+                    break;  
+                    
+                // Login failed - not valid username or password
+                case Codes.LOGIN_FAILED_RESPONSE:
+                    this.login_error_label.setText("Not valid username or password");
+                    break;
+
+                // Login failed - not a valid request format
+                case Codes.NOT_VALID_REQUEST:
+                    this.login_error_label.setText("Communication error: not a valid request"); 
+                    break;
+
+                // Login failed - unknown request
+                case Codes.UNKNOWN_REQUEST:
+                    this.login_error_label.setText("Communication error: unknown request");
+                    break;
+
+                // Login failed - unknown erro
+                default:
+                    this.login_error_label.setText("Communication error: unknown error"); 
+                    break;
             }
         }
     }
