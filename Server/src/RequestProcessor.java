@@ -32,7 +32,7 @@ public abstract class RequestProcessor {
         // check if request is valid by format
         boolean isValid = RequestPack.isValidRequest(data);
         TreeMap<String, Object> responseData = null;
-
+        
         // valid request format
         if(isValid){
 
@@ -42,6 +42,10 @@ public abstract class RequestProcessor {
                 case Codes.LOGIN_REQUEST:
                     return processLoginRequest(data);
 
+                // user request for getting list of users
+                case Codes.GET_USERS_REQUEST:
+                    return processGetUsersRequest();
+                
                 // request is not part of the list of known requests
                 default:
                     responseData = new TreeMap<>();
@@ -83,4 +87,21 @@ public abstract class RequestProcessor {
         
         return responseData;
     }
+
+    private static TreeMap<String, Object> processGetUsersRequest(){
+        TreeMap<String, Object> responseData = new TreeMap<>();
+
+        if(_manager == null){
+            responseData.put("response_code", Codes.GET_USERS_FAIL_RESPONSE);
+        }
+    
+        else{
+            responseData.put("response_code", Codes.GET_USERS_SUCCESS_RESPONSE);
+            responseData.put("users_list", _manager.getUsers().getUsersWithoutPassword());
+        }
+
+        return responseData;
+    }
+
 }
+

@@ -80,16 +80,6 @@ public class ClientHandler extends Thread{
         }
     }
 
-    
-    //send users list to the client
-    public void sendUsersListToClient(){
-        try{
-            this._out.writeObject(this._users);
-        }catch(IOException e){
-            System.err.println("Failed to send list of users to client");
-        }
-    
-    }
 
     /*
      * Close the input stream

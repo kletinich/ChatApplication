@@ -1,7 +1,9 @@
 package com.client;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
 
+import com.classes.Codes;
 import com.classes.ThisUser;
 import com.classes.User;
 
@@ -27,6 +29,14 @@ public class Controller {
 
     public static void setMainWindow(MainWindowController mainWindow){
         _mainWindow = mainWindow;
+    }
+
+    // retrieve list of users from the server
+    public static void getUsersFromServer(){
+        _client.proccessRequest(Codes.GET_USERS_REQUEST);
+        TreeMap<String, Object> response = _client.receiveResponse();
+        System.out.println(response.toString());
+        // to do: something with the list of users
     }
 
     public static Client getClient(){

@@ -63,6 +63,9 @@ public abstract class RequestPack {
             case Codes.LOGIN_REQUEST:
                 return isValidLoginRequest(request);
 
+            case Codes.GET_USERS_REQUEST:
+                return isValidGetUsersRequest(request);
+
             default:
                 System.err.println("Not a valid request");
                 return false;

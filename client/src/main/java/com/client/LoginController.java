@@ -61,7 +61,7 @@ public class LoginController extends Controller{
             _client.proccessRequest(Codes.LOGIN_REQUEST);
             TreeMap<String, Object> response = _client.receiveResponse();
             int responseCode = (int)response.get("response_code");
-
+            
             switch(responseCode){
 
                 // Login success
@@ -74,6 +74,7 @@ public class LoginController extends Controller{
 
                     System.out.println("Welcome " + firstName + " " + lastName);
 
+                    Controller.getUsersFromServer();
                     _mainWindow.showPostLoginDashboardWindow();
                     break;  
                     

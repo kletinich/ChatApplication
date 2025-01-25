@@ -58,7 +58,6 @@ public class Client {
      * Send a request to the server
      */
     public void proccessRequest(int requestCode){
-        int responseCode = 0;
         TreeMap<String, Object> data;
         
         connectToServer();
@@ -71,22 +70,36 @@ public class Client {
                     return;
                 }
                 
-                data = registerRequest(Controller.getMe());
+                data = loginRequest();
                 sendRequest(data);
 
                 break;
+            case Codes.GET_USERS_REQUEST:
+                if(Controller.getMe() == null){
+                    System.err.println("Me is not initialized");
+                    return;
+                }
+                
+                data = getUsersRequest();
+                sendRequest(data);
         }
     }
 
     /*
-     * Send register request to the server
+     * pack login request to the server
      */
-    public TreeMap<String, Object> registerRequest(ThisUser me){
+    public TreeMap<String, Object> loginRequest(){
 
-        String username = me.getUsername();
-        String password = me.getPassword();
+        String username = Controller.getMe().getUsername();
+        String password = Controller.getMe().getPassword();
 
         return RequestPack.pack(Codes.LOGIN_REQUEST, username, password);
+    }
+
+    // pack get user request
+    public TreeMap<String, Object> getUsersRequest(){
+        String username = Controller.getMe().getUsername();
+        return RequestPack.pack(Codes.GET_USERS_REQUEST, username);
     }
 
     // Send the packed request data to the server
