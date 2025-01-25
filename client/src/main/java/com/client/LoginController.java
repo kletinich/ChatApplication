@@ -74,7 +74,10 @@ public class LoginController extends Controller{
 
                     System.out.println("Welcome " + firstName + " " + lastName);
 
+                    // retrieve list of users for future chats
                     Controller.getUsersFromServer();
+
+                    // switch to postLoginDasboard window
                     _mainWindow.showPostLoginDashboardWindow();
                     break;  
                     
