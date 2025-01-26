@@ -14,6 +14,13 @@ import com.classes.RequestPack;
 
 
 public abstract class RequestResponseProcessor {
+
+    /*************************************
+     *                                   *
+     *          process requests         *
+     *                                   *
+     ************************************/
+
     public static TreeMap<String, Object> proccessRequest(int requestCode){        
         switch(requestCode){
             case Codes.LOGIN_REQUEST:
@@ -22,7 +29,7 @@ public abstract class RequestResponseProcessor {
                     return null;
                 }
                 
-                return loginRequest();
+                return processLoginRequest();
 
             case Codes.GET_USERS_REQUEST:
                 if(Controller.getMe() == null){
@@ -30,7 +37,7 @@ public abstract class RequestResponseProcessor {
                     return null;
                 }
                 
-                return getUsersRequest();
+                return processGetUsersRequest();
 
             default:
                 System.err.println("Client error: Unkown request");
@@ -38,7 +45,7 @@ public abstract class RequestResponseProcessor {
         }
     }
 
-    private static TreeMap<String, Object> loginRequest(){
+    private static TreeMap<String, Object> processLoginRequest(){
 
         String username = Controller.getMe().getUsername();
         String password = Controller.getMe().getPassword();
@@ -46,8 +53,19 @@ public abstract class RequestResponseProcessor {
         return RequestPack.pack(Codes.LOGIN_REQUEST, username, password);
     }
 
-    private static TreeMap<String, Object> getUsersRequest(){
+    private static TreeMap<String, Object> processGetUsersRequest(){
         String username = Controller.getMe().getUsername();
         return RequestPack.pack(Codes.GET_USERS_REQUEST, username);
+    }
+
+
+    /*************************************
+     *                                   *
+     *         process responses         *
+     *                                   *
+     ************************************/
+
+    public static void proccessResponse(TreeMap<String, Object> responseData){
+        
     }
 }

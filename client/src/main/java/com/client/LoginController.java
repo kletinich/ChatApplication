@@ -59,6 +59,8 @@ public class LoginController extends Controller{
             // process the request and receive response from the server
             _me = new ThisUser(username_login_text_field.getText(), password_login_text_field.getText() ,"", "");
             _client.proccessRequest(Codes.LOGIN_REQUEST);
+
+            // to do: rceive response in client class, not here
             TreeMap<String, Object> response = _client.receiveResponse();
             int responseCode = (int)response.get("response_code");
             
