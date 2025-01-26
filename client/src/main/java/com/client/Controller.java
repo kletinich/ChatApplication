@@ -15,6 +15,7 @@ public class Controller {
     protected static Client _client;
     protected static ThisUser _me;
     protected static MainWindowController _mainWindow;
+    protected static ChatDashboardController _chatDashboard;
     protected static ArrayList<User> _users;
 
     public static void initClient(){
@@ -31,12 +32,19 @@ public class Controller {
         _mainWindow = mainWindow;
     }
 
+    public static void setChatDashboardWindow(ChatDashboardController chatDashboard){
+        _chatDashboard = chatDashboard;
+    }
+
     // retrieve list of users from the server
     public static void getUsersFromServer(){
         _client.proccessRequest(Codes.GET_USERS_REQUEST);
         TreeMap<String, Object> response = _client.receiveResponse();
-        System.out.println(response.toString());
-        // to do: something with the list of users
+
+        _users = (ArrayList<User>) response.get("users_list");
+
+        _chatDashboard.setListOfUsers();
+        
     }
 
     public static Client getClient(){

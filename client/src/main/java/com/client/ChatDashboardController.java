@@ -1,6 +1,9 @@
 package com.client;
 
+import com.classes.User;
+
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -28,5 +31,16 @@ public class ChatDashboardController extends Controller {
     private VBox chatBox;
 
     public void initialize(){
+        _chatDashboard = this;
+    }
+
+    public void setListOfUsers(){
+        for(User user: _users){
+            String firstName = user.getFirstName();
+            String lastName = user.getLastName();
+            String username = user.getUsername();
+
+            this.listOfChats.getItems().add(new Label(firstName + " " + lastName + "\n" + username));
+        }
     }
 }

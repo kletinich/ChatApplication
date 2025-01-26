@@ -39,5 +39,6 @@ public class PostLoginDashboardController extends Controller{
          */
 
         this.chatDashboard.setVisible(true);
+
     }
 }
