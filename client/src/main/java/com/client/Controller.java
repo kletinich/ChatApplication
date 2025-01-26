@@ -9,29 +9,32 @@ import com.classes.User;
 
 /*
  * A parent class to all controllers.
- * Stores the Client class for communication with the server.
+ * Stores variables to be used by the controllers
  */
 public class Controller {
-    protected static Client _client;
-    protected static ThisUser _me;
-    protected static MainWindowController _mainWindow;
-    protected static ChatDashboardController _chatDashboard;
-    protected static ArrayList<User> _users;
+    protected static Client _client = null;            // client for communication
+    protected static ThisUser _me = null;              // data of the user
+    protected static ArrayList<User> _users = null;    // data of all the other users
+    
+    protected static MainWindowController _mainWindow = null;          // main window controller
+    protected static ChatDashboardController _chatDashboard = null;    // chat dashboard controller
 
+    // init the client 
     public static void initClient(){
         _client = new Client();
-        _me = null;
-        _users = null;
     }
 
+    // init the user with the given data
     public static void initMe(String username, String password, String firstName, String lastName){
         _me = new ThisUser(username, password, firstName, lastName);
     }
 
+    // set the main window controller to be accessed by other controllers
     public static void setMainWindow(MainWindowController mainWindow){
         _mainWindow = mainWindow;
     }
 
+    // set the chat dahsboard controller to be accessed by other controllers
     public static void setChatDashboardWindow(ChatDashboardController chatDashboard){
         _chatDashboard = chatDashboard;
     }
@@ -43,7 +46,14 @@ public class Controller {
 
         _users = (ArrayList<User>) response.get("users_list");
 
-        _chatDashboard.setListOfUsers();
+        if(_users != null){
+            _chatDashboard.setListOfUsers();
+        }
+
+        else{
+            // to do: write a check response in responsePack class
+            System.err.println("Unable to retrieve list of users");
+        }
         
     }
 
@@ -51,6 +61,7 @@ public class Controller {
         return _client;
     }
     
+    @SuppressWarnings("exports")
     public static ThisUser getMe(){
         return _me;
     }

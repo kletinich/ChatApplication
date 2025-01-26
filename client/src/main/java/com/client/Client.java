@@ -125,23 +125,6 @@ public class Client {
         return null;
     }
 
-    @SuppressWarnings("unchecked")
-    public void getUsersListFromServer(){
-        try{
-            Object data = this._in.readObject();
-            if(data instanceof ArrayList){
-                this._users = (ArrayList<User>)data;
-            }
-
-            else{
-                System.err.println("Object received from server is not of type 'User List'");
-            }
-        }catch(Exception e){
-            System.err.println("Error receiving data from server");
-            System.err.println(e);
-        }
-    }
-
     public ArrayList<User> getUsers(){
         return this._users;
     }
