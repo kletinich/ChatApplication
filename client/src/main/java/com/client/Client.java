@@ -7,7 +7,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
-import com.classes.*; 
+import com.classes.*;
+
+import javafx.beans.binding.ObjectExpression; 
 
 
 public class Client {
@@ -54,6 +56,17 @@ public class Client {
         }
     }
 
+    public void proccessRequest2(int requestCode){
+        TreeMap<String, Object> data;
+        
+        connectToServer();
+        data = RequestResponseProcessor.proccessRequest(requestCode);
+        sendRequest(data);
+
+        TreeMap<String, Object> response = receiveResponse();
+        RequestResponseProcessor.proccessResponse(response);
+    }
+
     /*
      * Send a request to the server
      */
@@ -88,6 +101,7 @@ public class Client {
         return null;
     }
 
+    @SuppressWarnings("exports")
     public ArrayList<User> getUsers(){
         return this._users;
     }

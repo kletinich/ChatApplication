@@ -53,13 +53,20 @@ public class LoginController extends Controller{
 
         // can process the login request
         if(!username_login_text_field.getText().trim().isEmpty() && !username_login_text_field.getText().trim().isEmpty()){
-            this.username_error_label.setText("");
+            _me = new ThisUser(username_login_text_field.getText(), password_login_text_field.getText() ,"", "");
+            _client.proccessRequest2(Codes.LOGIN_REQUEST);
+            //Controller.getUsersFromServer();
+            this.login_error_label.setText(RequestResponseProcessor.getMessage());
+
+
+
+            /*this.username_error_label.setText("");
             this.password_error_label.setText("");
 
             // process the request and receive response from the server
             _me = new ThisUser(username_login_text_field.getText(), password_login_text_field.getText() ,"", "");
             _client.proccessRequest(Codes.LOGIN_REQUEST);
-
+            
             // to do: rceive response in client class, not here
             TreeMap<String, Object> response = _client.receiveResponse();
             int responseCode = (int)response.get("response_code");
@@ -90,19 +97,20 @@ public class LoginController extends Controller{
 
                 // Login failed - not a valid request format
                 case Codes.NOT_VALID_REQUEST:
-                    this.login_error_label.setText("Communication error: not a valid request"); 
+                    this.login_error_label.setText("Server error: not a valid request"); 
                     break;
 
                 // Login failed - unknown request
                 case Codes.UNKNOWN_REQUEST:
-                    this.login_error_label.setText("Communication error: unknown request");
+                    this.login_error_label.setText("Server error: unknown request");
                     break;
 
                 // Login failed - unknown erro
                 default:
                     this.login_error_label.setText("Communication error: unknown error"); 
                     break;
-            }
+                    */
+            
         }
     }
 }

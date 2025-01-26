@@ -29,6 +29,10 @@ public class Controller {
         _me = new ThisUser(username, password, firstName, lastName);
     }
 
+    public static void setUsers(ArrayList<User> users){
+        _users = users;
+    }
+
     // set the main window controller to be accessed by other controllers
     public static void setMainWindow(MainWindowController mainWindow){
         _mainWindow = mainWindow;
