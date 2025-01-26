@@ -42,6 +42,36 @@ public class Client {
         System.out.println("---------------------------------------------");
     }
 
+    @SuppressWarnings("exports")
+    public ArrayList<User> getUsers(){
+        return this._users;
+    }
+
+    /*
+     * Proccess requests of the client:
+     * connect to server
+     * proccess the request
+     * pack the request
+     * receive response from the server
+     * proccess the response
+     */
+    public void proccessRequest(int requestCode){
+        TreeMap<String, Object> data;
+        
+        // connect and send the request to the server
+        connectToServer();
+        data = RequestResponseProcessor.proccessRequest(requestCode);
+
+        if(data != null){
+            sendRequest(data);
+        }
+
+        // receive and proccess the response
+        data = receiveResponse();
+        RequestResponseProcessor.proccessResponse(data);
+    }
+
+    // connect to the server 
     public void connectToServer(){
         try{
             this._socket = new Socket(this._ip, this._port);
@@ -54,17 +84,6 @@ public class Client {
             System.err.println("Can't connect to server");
             System.exit(1);
         }
-    }
-
-    public void proccessRequest(int requestCode){
-        TreeMap<String, Object> data;
-        
-        connectToServer();
-        data = RequestResponseProcessor.proccessRequest(requestCode);
-        sendRequest(data);
-
-        TreeMap<String, Object> response = receiveResponse();
-        RequestResponseProcessor.proccessResponse(response);
     }
 
     // Send the packed request data to the server
@@ -89,10 +108,5 @@ public class Client {
         }
 
         return null;
-    }
-
-    @SuppressWarnings("exports")
-    public ArrayList<User> getUsers(){
-        return this._users;
     }
 }

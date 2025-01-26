@@ -39,6 +39,7 @@ public class LoginController extends Controller{
 
     @FXML
     public void initialize(){
+        _me = new ThisUser("", "");
     }
 
     @FXML
@@ -53,8 +54,13 @@ public class LoginController extends Controller{
 
         // can process the login request
         if(!username_login_text_field.getText().trim().isEmpty() && !username_login_text_field.getText().trim().isEmpty()){
-            _me = new ThisUser(username_login_text_field.getText(), password_login_text_field.getText() ,"", "");
+            _me.setUsername(username_login_text_field.getText().trim());
+            _me.setPassword(password_login_text_field.getText().trim());
+
+            // send the request to the server and proccess the response
             _client.proccessRequest(Codes.LOGIN_REQUEST);
+
+            // for potential error messages
             this.login_error_label.setText(RequestResponseProcessor.getMessage());
         }
     }
