@@ -8,6 +8,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 /*
@@ -32,6 +33,19 @@ public class ChatDashboardController extends Controller {
 
     public void initialize(){
         _chatDashboard = this;
+
+        listOfChats.setOnMouseClicked((MouseEvent event) -> {
+            // Check if an item is selected
+            Label selectedLabel = (Label) listOfChats.getSelectionModel().getSelectedItem();
+            if (selectedLabel != null) {
+
+                // to do: add click event to open chatbox
+                // Trigger an action, such as showing the chat
+                String selectedChat = selectedLabel.getText();
+                System.out.println("Selected Chat: " + selectedChat);
+
+            }
+        });
     }
 
     public void setListOfUsers(){
@@ -40,7 +54,10 @@ public class ChatDashboardController extends Controller {
             String lastName = user.getLastName();
             String username = user.getUsername();
 
-            this.listOfChats.getItems().add(new Label(firstName + " " + lastName + "\n" + username));
+
+            if(!_me.getUsername().equals(username)){
+                this.listOfChats.getItems().add(new Label(firstName + " " + lastName));
+            }
         }
     }
 }
