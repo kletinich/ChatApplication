@@ -1,5 +1,6 @@
 package com.classes;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 /*
@@ -52,5 +53,119 @@ public abstract class ResponsePack {
         response.put("response_code", responseCode);
 
         return response;
+    }
+
+    /*********************************************************
+    *                                                        * 
+    *                                                        *
+    *                  VALIDATION_FUNCTIONS                  *
+    *                                                        *
+    *                                                        *
+    *********************************************************/
+
+    public static boolean isValidResponse(TreeMap<String, Object> response){
+        int responseCode;
+        Object check = response.get("response_code");
+
+        if(check == null || !(check instanceof Integer)){
+            System.err.println("Not a valid response");
+            return false;
+        }
+
+        responseCode = (int) check;
+
+        // to do: add functions
+        switch(responseCode){
+            case Codes.LOGIN_FAILED_RESPONSE:
+            case Codes.LOGIN_SUCCESS_RESPONSE:
+                return isValidLoginResponse(responseCode, response);
+
+            case Codes.GET_USERS_FAIL_RESPONSE:
+            case Codes.GET_USERS_SUCCESS_RESPONSE:
+                return isValidGetUsersResponse(responseCode, response);
+        }
+
+        return true;
+    }
+
+    // check if a given login response is valid
+    private static boolean isValidLoginResponse(int responseCode, TreeMap<String, Object> response){
+
+        // failed to login - no data
+        if(responseCode == Codes.LOGIN_FAILED_RESPONSE){
+            if(response.size() != 1){
+                return false;
+            }
+
+            return true;
+        }
+
+        // check if returned first and last names
+        else if(responseCode == Codes.LOGIN_SUCCESS_RESPONSE){
+            Object check = response.get("first_name");
+
+            if(check == null){
+                System.err.println("No first name was sent");
+                return false;
+            }
+
+            if(!(check instanceof String)){
+                System.err.println("Not a valid first name");
+                return false;
+            }
+
+            check = response.get("last_name");
+
+            if(check == null){
+                System.err.println("No last name was sent");
+                return false;
+            }
+
+            if(!(check instanceof String)){
+                System.err.println("Not a valid last name");
+                return false;
+            }
+
+            return true;
+        }
+
+        // should not get here because this function is calles with login codes
+        return false;
+    }
+
+    // check if a given login response is valid
+    private static boolean isValidGetUsersResponse(int responseCode, TreeMap<String, Object> response){
+        if(responseCode == Codes.GET_USERS_FAIL_RESPONSE){
+            if(response.size() != 1){
+                return false;
+            }
+
+            return true;
+        }
+
+        // check if retrieved a valid user list
+        else if(responseCode == Codes.GET_USERS_SUCCESS_RESPONSE){
+            Object check = response.get("users_list");
+
+            if(check == null){
+                System.err.println("No list of users was sent");
+                return false;
+            }
+
+            if(!(check instanceof ArrayList)){
+                return false;
+            }
+
+            for(Object obj: (ArrayList<?>)response.get("users_list")){
+                if(!(obj instanceof User)){
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        // should not get here because this function is calles with getUsers codes
+        return false;
     }
 }
