@@ -61,45 +61,8 @@ public class Client {
         TreeMap<String, Object> data;
         
         connectToServer();
-        
-        switch(requestCode){
-            
-            case Codes.LOGIN_REQUEST:
-                if(Controller.getMe() == null){
-                    System.err.println("Me is not initialized");
-                    return;
-                }
-                
-                data = loginRequest();
-                sendRequest(data);
-
-                break;
-            case Codes.GET_USERS_REQUEST:
-                if(Controller.getMe() == null){
-                    System.err.println("Me is not initialized");
-                    return;
-                }
-                
-                data = getUsersRequest();
-                sendRequest(data);
-        }
-    }
-
-    /*
-     * pack login request to the server
-     */
-    public TreeMap<String, Object> loginRequest(){
-
-        String username = Controller.getMe().getUsername();
-        String password = Controller.getMe().getPassword();
-
-        return RequestPack.pack(Codes.LOGIN_REQUEST, username, password);
-    }
-
-    // pack get user request
-    public TreeMap<String, Object> getUsersRequest(){
-        String username = Controller.getMe().getUsername();
-        return RequestPack.pack(Codes.GET_USERS_REQUEST, username);
+        data = RequestResponseProcessor.proccessRequest(requestCode);
+        sendRequest(data);
     }
 
     // Send the packed request data to the server
