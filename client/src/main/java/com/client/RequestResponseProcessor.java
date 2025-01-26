@@ -129,12 +129,13 @@ public abstract class RequestResponseProcessor {
 
         System.out.println("Welcome " + firstName + " " + lastName);
 
-        Controller.getClient().proccessRequest2(Codes.GET_USERS_REQUEST);
+        Controller.getClient().proccessRequest(Codes.GET_USERS_REQUEST);
 
         Controller._mainWindow.showPostLoginDashboardWindow();
     }
 
     private static void proccessGetUsersSuccessResponse(TreeMap<String, Object> response){
+        @SuppressWarnings("unchecked")
         ArrayList<User> users = (ArrayList<User>) response.get("users_list");
 
         if(users != null){

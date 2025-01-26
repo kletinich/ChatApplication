@@ -56,7 +56,7 @@ public class Client {
         }
     }
 
-    public void proccessRequest2(int requestCode){
+    public void proccessRequest(int requestCode){
         TreeMap<String, Object> data;
         
         connectToServer();
@@ -65,17 +65,6 @@ public class Client {
 
         TreeMap<String, Object> response = receiveResponse();
         RequestResponseProcessor.proccessResponse(response);
-    }
-
-    /*
-     * Send a request to the server
-     */
-    public void proccessRequest(int requestCode){
-        TreeMap<String, Object> data;
-        
-        connectToServer();
-        data = RequestResponseProcessor.proccessRequest(requestCode);
-        sendRequest(data);
     }
 
     // Send the packed request data to the server
@@ -90,6 +79,7 @@ public class Client {
     // receive a response from the server
     public TreeMap<String, Object> receiveResponse(){
         try {
+            @SuppressWarnings("unchecked")
             TreeMap<String, Object> responseData = (TreeMap<String, Object>) this._in.readObject();
             return responseData;
         } catch (IOException e) {

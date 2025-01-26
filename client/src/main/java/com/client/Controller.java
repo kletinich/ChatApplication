@@ -43,24 +43,6 @@ public class Controller {
         _chatDashboard = chatDashboard;
     }
 
-    // retrieve list of users from the server
-    public static void getUsersFromServer(){
-        _client.proccessRequest(Codes.GET_USERS_REQUEST);
-        TreeMap<String, Object> response = _client.receiveResponse();
-
-        _users = (ArrayList<User>) response.get("users_list");
-
-        if(_users != null){
-            _chatDashboard.setListOfUsers();
-        }
-
-        else{
-            // to do: write a check response in responsePack class
-            System.err.println("Unable to retrieve list of users");
-        }
-        
-    }
-
     public static Client getClient(){
         return _client;
     }
