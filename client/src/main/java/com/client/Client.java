@@ -55,33 +55,45 @@ public class Client {
      * receive response from the server
      * proccess the response
      */
-    public void proccessRequest(int requestCode){
+    public int proccessRequest(int requestCode){
         TreeMap<String, Object> data;
         
         // connect and send the request to the server
-        connectToServer();
-        data = RequestResponseProcessor.proccessRequest(requestCode);
+        int connectStatus = connectToServer();
 
-        if(data != null){
-            sendRequest(data);
+        // connected successfully to the server
+        if(connectStatus == Codes.CONNECTION_SUCCESS){
+            data = RequestResponseProcessor.proccessRequest(requestCode);
+
+            if(data != null){
+                sendRequest(data);
+            }
+
+            // receive and proccess the response
+            data = receiveResponse();
+            RequestResponseProcessor.proccessResponse(data);
+
+            return Codes.CONNECTION_SUCCESS;
         }
 
-        // receive and proccess the response
-        data = receiveResponse();
-        RequestResponseProcessor.proccessResponse(data);
+        // didn't connect to the server
+        return Codes.CONNECTION_ERROR;
     }
 
     // connect to the server 
-    public void connectToServer(){
+    public int connectToServer(){
         try{
             this._socket = new Socket(this._ip, this._port);
             System.out.println("Connected to server");
 
             this._out = new ObjectOutputStream(this._socket.getOutputStream());
             this._in = new ObjectInputStream(this._socket.getInputStream());
+
+            return Codes.CONNECTION_SUCCESS;
             
         }catch(IOException e){
             System.err.println("Can't connect to server");
+            return Codes.CONNECTION_ERROR;
         }
     }
 

@@ -58,10 +58,17 @@ public class LoginController extends Controller{
             _me.setPassword(password_login_text_field.getText().trim());
 
             // send the request to the server and proccess the response
-            _client.proccessRequest(Codes.LOGIN_REQUEST);
+            int connectStatus = _client.proccessRequest(Codes.LOGIN_REQUEST);
+
+            // didn't connect to the server
+            if(connectStatus == Codes.CONNECTION_ERROR){
+                this.login_error_label.setText("Connection error: can't connect to the server");
+            }
 
             // for potential error messages
-            this.login_error_label.setText(RequestResponseProcessor.getMessage());
+            else{
+                this.login_error_label.setText(RequestResponseProcessor.getMessage());
+            }
         }
     }
 }
