@@ -79,10 +79,9 @@ public class Client {
 
             this._out = new ObjectOutputStream(this._socket.getOutputStream());
             this._in = new ObjectInputStream(this._socket.getInputStream());
-
+            
         }catch(IOException e){
             System.err.println("Can't connect to server");
-            System.exit(1);
         }
     }
 

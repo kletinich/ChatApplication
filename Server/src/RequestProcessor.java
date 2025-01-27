@@ -68,13 +68,13 @@ public abstract class RequestProcessor {
      */
     private static TreeMap<String, Object> processLoginRequest(TreeMap<String, Object> validData){
         TreeMap<String, Object> responseData = new TreeMap<>();
-
+        
         String username = (String)validData.get("username");
         String password = (String)validData.get("password");
 
         // check if user is registered
         boolean isRegistered = _manager.getUsers().isRegistered(username, password);
-
+        
         // user is not registered
         if(!isRegistered){
             responseData.put("response_code", Codes.LOGIN_FAILED_RESPONSE);
