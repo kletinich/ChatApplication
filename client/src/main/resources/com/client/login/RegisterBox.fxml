@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="login_view" alignment="CENTER" prefHeight="200.0" prefWidth="388.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.RegisterController">
+<VBox fx:id="register_view" alignment="CENTER" prefHeight="200.0" prefWidth="388.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.RegisterController">
    <children>
       <Label prefHeight="17.0" prefWidth="48.0" text="Register">
          <VBox.margin>
@@ -55,7 +55,7 @@
       <HBox prefHeight="26.0" prefWidth="388.0">
          <children>
             <Pane prefHeight="26.0" prefWidth="173.0" />
-            <Button fx:id="register_button" mnemonicParsing="false" prefHeight="25.0" prefWidth="77.0" text="Register" />
+            <Button fx:id="register_button" mnemonicParsing="false" onMouseClicked="#register" prefHeight="25.0" prefWidth="77.0" text="Register" />
             <Pane prefHeight="26.0" prefWidth="47.0" />
             <Label fx:id="back_to_login_label" onMouseClicked="#moveToLoginWindow" prefHeight="34.0" prefWidth="113.0" text="Back to login">
                <font>

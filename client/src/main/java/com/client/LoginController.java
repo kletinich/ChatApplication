@@ -40,10 +40,15 @@ public class LoginController extends Controller{
     @FXML
     public void initialize(){
         _me = new ThisUser("", "");
+
     }
 
     @FXML
     public void login(){
+        username_error_label.setText("");
+        password_error_label.setText("");
+        login_error_label.setText("");
+
         if(username_login_text_field.getText().trim().isEmpty()){
             this.username_error_label.setText("Empty field");
         }
@@ -53,7 +58,7 @@ public class LoginController extends Controller{
         }
 
         // can process the login request
-        if(!username_login_text_field.getText().trim().isEmpty() && !username_login_text_field.getText().trim().isEmpty()){
+        if(!username_login_text_field.getText().trim().isEmpty() && !password_login_text_field.getText().trim().isEmpty()){
             _me.setUsername(username_login_text_field.getText().trim());
             _me.setPassword(password_login_text_field.getText().trim());
 
