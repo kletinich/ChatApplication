@@ -71,4 +71,9 @@ public class LoginController extends Controller{
             }
         }
     }
+
+    @FXML 
+    public void moveToRegisterWindow(){
+        _mainWindow.showRegisterWindow();
+    }
 }
