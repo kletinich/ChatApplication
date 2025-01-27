@@ -1,9 +1,13 @@
 package com.client;
 
+import javax.security.auth.callback.Callback;
+
 import com.classes.User;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -56,8 +60,11 @@ public class ChatDashboardController extends Controller {
 
 
             if(!_me.getUsername().equals(username)){
-                this.listOfChats.getItems().add(new Label(firstName + " " + lastName));
+                Label userLabel = new Label(firstName + " " + lastName);
+                userLabel.setStyle("-fx-padding: 5; -fx-font-size: 14px;");
+            
+                this.listOfChats.getItems().add(userLabel);
             }
-        }
+        }        
     }
 }

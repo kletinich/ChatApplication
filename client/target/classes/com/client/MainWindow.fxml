@@ -8,6 +8,7 @@
       <StackPane prefHeight="400.0" prefWidth="221.0" BorderPane.alignment="CENTER">
          <fx:include fx:id="loginBox" source="login//LoginBox.fxml" />
          <fx:include fx:id="postLoginDashboard" source="postLogin/PostLoginDashBoard.fxml" />
+         <fx:include fx:id="registerBox" source="login/RegisterBox.fxml" />
       </StackPane>
    </center>
 </BorderPane>

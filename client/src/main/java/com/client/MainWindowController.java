@@ -2,6 +2,7 @@ package com.client;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 /*
@@ -14,6 +15,7 @@ public class MainWindowController extends Controller{
 
     @FXML
     private HBox postLoginDashboard;
+
 
     @FXML
     public void initialize(){
