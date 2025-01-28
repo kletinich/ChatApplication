@@ -18,6 +18,12 @@ public class RegisterController extends Controller {
     private PasswordField confirm_password_text_field;
 
     @FXML
+    private TextField first_name_text_field;
+
+    @FXML
+    private TextField last_name_text_field;
+
+    @FXML
     private Button register_button;
 
     @FXML
@@ -30,12 +36,18 @@ public class RegisterController extends Controller {
     private Label confirm_password_error_label;
 
     @FXML
+    private Label first_name_error_label;
+
+    @FXML
+    private Label last_name_error_label;
+
+    @FXML
     private Label register_error_label;
 
 
     @FXML
     public void initialize(){
-        
+
     }
 
     @FXML 
@@ -45,24 +57,39 @@ public class RegisterController extends Controller {
 
     @FXML
     public void register(){
-        username_error_label.setText("");
-        password_error_label.setText("");
-        confirm_password_error_label.setText("");
+        this.username_error_label.setText("");
+        this.password_error_label.setText("");
+        this.confirm_password_error_label.setText("");
+        this.first_name_error_label.setText("");
+        this.last_name_error_label.setText("");
+
         register_error_label.setText("");
 
-        if(username_text_field.getText().trim().isEmpty()){
+        if(this.username_text_field.getText().trim().isEmpty()){
             this.username_error_label.setText("Empty field");
         }
 
-        if(password_text_field.getText().trim().isEmpty()){
+        if(this.password_text_field.getText().trim().isEmpty()){
             this.password_error_label.setText("Empty field");
         }
 
-        if(confirm_password_text_field.getText().trim().isEmpty()){
+        if(this.confirm_password_text_field.getText().trim().isEmpty()){
             this.confirm_password_error_label.setText("Empty field");
         }
 
-        if(!username_text_field.getText().trim().isEmpty() && !password_text_field.getText().trim().isEmpty() && !confirm_password_text_field.getText().trim().isEmpty()){
+        if(this.first_name_text_field.getText().trim().isEmpty()){
+            this.first_name_error_label.setText("Empty field");
+        }
+
+        if(this.last_name_text_field.getText().trim().isEmpty()){
+            this.last_name_error_label.setText("Empty field");
+        }
+
+
+
+        if(!username_text_field.getText().trim().isEmpty() && !password_text_field.getText().trim().isEmpty() && 
+            !confirm_password_text_field.getText().trim().isEmpty() && !first_name_text_field.getText().trim().isEmpty() &&
+            !last_name_text_field.getText().trim().isEmpty()){
 
         }
     }
