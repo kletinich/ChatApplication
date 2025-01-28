@@ -3,6 +3,7 @@ import java.util.TreeMap;
 import com.classes.Codes;
 import com.classes.RequestPack;
 import com.classes.ResponsePack;
+import com.classes.ThisUser;
 
 
 
@@ -39,13 +40,17 @@ public abstract class RequestProcessor {
 
             switch((int)data.get("request_code")){
 
+                // user request for register
+                case Codes.REGISTER_REQUEST:
+                    return proccessRegisterRequest(data);
+
                 // user request for login
                 case Codes.LOGIN_REQUEST:
-                    return processLoginRequest(data);
+                    return proccessLoginRequest(data);
 
                 // user request for getting list of users
                 case Codes.GET_USERS_REQUEST:
-                    return processGetUsersRequest();
+                    return proccessGetUsersRequest();
                 
                 // request is not part of the list of known requests
                 default:
@@ -62,11 +67,47 @@ public abstract class RequestProcessor {
     }
 
     /*
+     * Process A register request.
+     * Return a response treeMap.
+     * Assumption - data is valid
+     */
+    private static TreeMap<String, Object> proccessRegisterRequest(TreeMap<String, Object> validData){
+        TreeMap<String, Object> responseData = new TreeMap<>();
+
+        String username = (String)validData.get("username");
+
+        // check if user with the same username is registered
+        boolean isRegistered = _manager.getUsers().isRegistered(username);
+
+        // user already exists
+        if(isRegistered){
+            responseData.put("response_code", Codes.REGISTER_FAILED_RESPONSE);
+        }
+
+        // user doesn't exists. Save his data
+        else{
+            responseData.put("response_code", Codes.REGISTER_SUCCESS_RESPONSE);
+            
+            String password = (String)validData.get("password");
+            String firstName = (String)validData.get("first_name");
+            String lastName = (String)validData.get("last_name");
+
+            ThisUser newUser = new ThisUser(username, password, firstName, lastName);
+
+            _manager.getUsers().addUser(newUser);
+            FileHandler.addUserToFile(newUser);
+        }
+
+        return responseData;
+    }
+
+
+    /*
      * Process A login request.
      * Return a response treeMap.
      * Assumption - data is valid
      */
-    private static TreeMap<String, Object> processLoginRequest(TreeMap<String, Object> validData){
+    private static TreeMap<String, Object> proccessLoginRequest(TreeMap<String, Object> validData){
         TreeMap<String, Object> responseData = new TreeMap<>();
         
         String username = (String)validData.get("username");
@@ -89,7 +130,7 @@ public abstract class RequestProcessor {
         return responseData;
     }
 
-    private static TreeMap<String, Object> processGetUsersRequest(){
+    private static TreeMap<String, Object> proccessGetUsersRequest(){
         TreeMap<String, Object> responseData = new TreeMap<>();
 
         if(_manager == null){

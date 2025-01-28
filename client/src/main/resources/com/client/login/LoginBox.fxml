@@ -12,12 +12,16 @@
 
 <VBox fx:id="login_view" alignment="CENTER" prefHeight="200.0" prefWidth="245.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.LoginController">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="265.0" text="Login" textAlignment="CENTER">
-         <VBox.margin>
-            <Insets bottom="5.0" left="50.0" />
-         </VBox.margin>
-      </Label>
-      <HBox alignment="CENTER" prefHeight="21.0" prefWidth="221.0">
+      <HBox prefHeight="3.0" prefWidth="245.0">
+         <children>
+            <Label contentDisplay="CENTER" prefHeight="0.0" prefWidth="246.0" text="Login" textAlignment="CENTER">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="100.0" />
+               </HBox.margin>
+            </Label>
+         </children>
+      </HBox>
+      <HBox prefHeight="21.0" prefWidth="221.0">
          <children>
             <Label prefHeight="31.0" prefWidth="63.0" text="Username:">
                <HBox.margin>
@@ -30,7 +34,7 @@
             <Label fx:id="username_error_label" textFill="RED" />
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="21.0" prefWidth="221.0">
+      <HBox prefHeight="21.0" prefWidth="221.0">
          <children>
             <Label alignment="CENTER" prefHeight="23.0" prefWidth="58.0" text="Password:">
                <HBox.margin>
@@ -43,13 +47,17 @@
             <Label fx:id="password_error_label" textFill="RED" />
          </children>
       </HBox>
-      <Button fx:id="connect_btn" mnemonicParsing="false" onAction="#login" text="Connect">
-         <VBox.margin>
-            <Insets left="50.0" top="5.0" />
-         </VBox.margin>
-      </Button>
+      <HBox prefHeight="6.0" prefWidth="245.0">
+         <children>
+            <Button fx:id="connect_btn" mnemonicParsing="false" onAction="#login" text="Connect">
+               <HBox.margin>
+                  <Insets left="90.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
       <Label fx:id="login_error_label" alignment="CENTER" textFill="RED" />
-      <HBox alignment="CENTER" prefHeight="21.0" prefWidth="221.0">
+      <HBox prefHeight="21.0" prefWidth="221.0">
          <children>
             <Pane prefHeight="25.0" prefWidth="13.0" />
             <Label fx:id="forgot_password_label" prefHeight="17.0" prefWidth="109.0" text="Forgot password">

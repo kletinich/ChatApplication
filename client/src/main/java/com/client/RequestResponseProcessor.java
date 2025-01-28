@@ -36,6 +36,14 @@ public abstract class RequestResponseProcessor {
     public static TreeMap<String, Object> proccessRequest(int requestCode){        
         switch(requestCode){
 
+            case Codes.REGISTER_REQUEST:
+                if(Controller.getMe() == null){
+                    System.err.println("Me is not initialized");
+                    return null;
+                }
+
+                return proccessRegisterRequest();
+
             // user wants to login
             case Codes.LOGIN_REQUEST:
                 if(Controller.getMe() == null){
@@ -61,6 +69,15 @@ public abstract class RequestResponseProcessor {
         }
     }
 
+    private static TreeMap<String, Object> proccessRegisterRequest(){
+        String firstName = Controller.getMe().getFirstName();
+        String lastName = Controller.getMe().getLastName();
+        String username = Controller.getMe().getUsername();
+        String password = Controller.getMe().getPassword();
+
+        return RequestPack.pack(Codes.REGISTER_REQUEST, username, password, firstName, lastName);
+    }
+
     // proccess a request to login
     private static TreeMap<String, Object> proccessLoginRequest(){
 
@@ -83,7 +100,7 @@ public abstract class RequestResponseProcessor {
      *                                   *
      ************************************/
 
-     // proccess a general response from the server
+    // proccess a general response from the server
     public static void proccessResponse(TreeMap<String, Object> responseData){
         boolean isValidResponse = ResponsePack.isValidResponse(responseData);
         int responseCode;
@@ -98,6 +115,16 @@ public abstract class RequestResponseProcessor {
         responseCode = (int)responseData.get("response_code");
 
         switch(responseCode){
+
+            // could not register because user with the same username exists
+            case Codes.REGISTER_FAILED_RESPONSE:
+                message = "User already exists";
+                break;
+
+            // registered successfully
+            case Codes.REGISTER_SUCCESS_RESPONSE:
+                proccessRegisterSuccessResponse();
+                break;
 
             // could not login because of incorrect username or password
             case Codes.LOGIN_FAILED_RESPONSE:
@@ -134,6 +161,13 @@ public abstract class RequestResponseProcessor {
                 message = "Server error: unknown response";
                 break;
         }
+    }
+
+    // proccess a successfull register response
+    private static void proccessRegisterSuccessResponse(){
+        System.out.println("Register successfull, now login");
+
+        Controller._mainWindow.showLoginWindow();
     }
 
     // proccess a successfull login response

@@ -46,6 +46,25 @@ public class FileHandler {
         }
     }
 
+    // save a new user to the users.info file
+    public static void addUserToFile(ThisUser newUser){
+        try{
+            FileWriter usersFile = new FileWriter(FILE_NAME, true);
+            String info = newUser.getFirstName() + " " +
+            newUser.getLastName() + " " +
+            newUser.getUsername() + " " +
+            newUser.getPassword();
+
+            usersFile.append(info);
+
+            usersFile.close();
+            System.out.println("Users data written to file");
+
+        } catch (IOException e) {
+            System.err.println("Error writing to file");
+        }
+    }
+
     // Load the list of registerd clients from users.info file
     public static ArrayList<ThisUser> readUsersFromFile(){
         ArrayList<ThisUser> users = new ArrayList<>();

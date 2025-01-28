@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="register_view" alignment="CENTER" prefHeight="200.0" prefWidth="388.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.RegisterController">
+<VBox fx:id="register_view" alignment="CENTER" prefHeight="212.0" prefWidth="453.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.client.RegisterController">
    <children>
       <Label prefHeight="17.0" prefWidth="48.0" text="Register">
          <VBox.margin>
@@ -46,7 +46,7 @@
             <Label prefHeight="25.0" prefWidth="111.0" text="Confirm password:" />
             <PasswordField fx:id="confirm_password_text_field" />
             <Pane prefHeight="25.0" prefWidth="17.0" />
-            <Label fx:id="confirm_password_error_label" prefHeight="25.0" prefWidth="93.0" textFill="RED" />
+            <Label fx:id="confirm_password_error_label" prefHeight="25.0" prefWidth="149.0" textFill="RED" />
          </children>
          <VBox.margin>
             <Insets left="10.0" />
@@ -89,7 +89,7 @@
             <Insets top="10.0" />
          </VBox.margin>
       </HBox>
-      <Label fx:id="register_error_label" alignment="CENTER" prefHeight="17.0" prefWidth="113.0" textFill="RED">
+      <Label fx:id="register_error_label" alignment="CENTER" prefHeight="17.0" prefWidth="227.0" textFill="RED">
          <VBox.margin>
             <Insets top="5.0" />
          </VBox.margin>
