@@ -56,6 +56,7 @@ public class FileHandler {
             newUser.getPassword();
 
             usersFile.append(info);
+            usersFile.append("\n");
 
             usersFile.close();
             System.out.println("Users data written to file");
