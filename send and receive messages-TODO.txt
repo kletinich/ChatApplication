@@ -1,0 +1,20 @@
+sharedClasses:
+1. Add Message class - from (username), to (username), message (string text), sent time (time/date)
+
+server:
+1. for each registered user add a message queue - queue<Message>, each queue will hold messages for disconnected users until they login.
+2. when client login add while(true) loop for sending and receiving messages (connection is open).
+3. HOW TO KNOW WHEN CONNECTED: treemap<User/ThisUser> of connected users
+3. when client disconnects finish the while loop and store receiving messages while gone.
+
+client:
+1. store cache or chat history with each user that uses the app.
+2. when login maintain connection, sending and receiving messages.
+3. when disconnected and login again, receive all the waited messages in queue. for each message check from who and send to the right component of the sender.
+
+DESIGN IDEA:
+1.Message class - stores messages, from, to
+2. queue<Message> - stores Message variables for all messages to a specific user.
+3. UserMessageContainer - stores the message queue, is connected/not, more data... (maybe add the data to User/ThisUser/inherit)
+4. TreeMap<UserMessageContainer> - stores the users and their containers.
+5. UserManagmentContainer - stores the users treemap and more data
