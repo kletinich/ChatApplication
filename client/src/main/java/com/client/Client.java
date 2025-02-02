@@ -77,6 +77,8 @@ public class Client implements Runnable{
             data = receiveResponse();
             RequestResponseProcessor.proccessResponse(data);
 
+            closeConnection();
+
             return Codes.CONNECTION_SUCCESS;
         }
 
@@ -98,6 +100,14 @@ public class Client implements Runnable{
         }catch(IOException e){
             System.err.println("Can't connect to server");
             return Codes.CONNECTION_ERROR;
+        }
+    }
+
+    public void closeConnection(){
+        try {
+            this._socket.close();
+        } catch (IOException e) {
+            System.out.println("Closed connection with the server");
         }
     }
 

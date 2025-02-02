@@ -51,7 +51,7 @@ public class ClientHandler extends Thread{
         
         // send the response of the request back to the client and close
         sendResponse(responseData);
-        closeConnection();
+        //closeConnection();
     }
 
     // wait for requests from the client
