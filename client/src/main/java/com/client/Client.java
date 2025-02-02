@@ -75,9 +75,12 @@ public class Client implements Runnable{
 
             // receive and proccess the response
             data = receiveResponse();
-            RequestResponseProcessor.proccessResponse(data);
 
+            // close connection before proccessing the data
             closeConnection();
+
+            // proccess the data received from the server
+            RequestResponseProcessor.proccessResponse(data);
 
             return Codes.CONNECTION_SUCCESS;
         }

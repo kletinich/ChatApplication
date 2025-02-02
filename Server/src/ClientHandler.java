@@ -44,40 +44,47 @@ public class ClientHandler extends Thread{
 
     @Override
     public void run(){
+        try{
+            while(true){
+                if(this._socket.isConnected() && !this._socket.isClosed()){
+                    
+                    // receive a request from the client and process it
+                    TreeMap<String, Object> data = receiveRequest();
+                    TreeMap<String, Object> responseData = RequestProcessor.processRequest(data);
+                    
+                    // send the response of the request back to the client and close
+                    sendResponse(responseData);
+                }
 
-        // receive a request from the client and process it
-        TreeMap<String, Object> data = receiveRequest();
-        TreeMap<String, Object> responseData = RequestProcessor.processRequest(data);
-        
-        // send the response of the request back to the client and close
-        sendResponse(responseData);
-        //closeConnection();
+                else{
+                    break;
+                }
+            }
+        }catch(IOException e){
+            System.out.println("Client closed connection");
+            return;
+        }
+
     }
 
     // wait for requests from the client
-    public TreeMap<String, Object> receiveRequest(){
+    public TreeMap<String, Object> receiveRequest() throws IOException{
         
         try {
             @SuppressWarnings("unchecked")
             TreeMap<String,Object> data = (TreeMap<String, Object>) this._in.readObject();
             return data;
 
-        } catch (ClassNotFoundException e) {
+         } catch (ClassNotFoundException e) {
             System.err.println("Class not found");
-        } catch (IOException e) {
-            System.err.println("Error receiving data from client");
-        }
+         } 
 
         return null;
     }
 
     // send response to client
-    public void sendResponse(TreeMap<String, Object> responseData){
-        try {
-            this._out.writeObject(responseData);
-        } catch (IOException e) {
-            System.err.println("Error sending data to client");
-        }
+    public void sendResponse(TreeMap<String, Object> responseData) throws IOException{
+        this._out.writeObject(responseData);
     }
 
 
