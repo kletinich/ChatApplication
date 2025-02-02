@@ -9,10 +9,8 @@ import java.util.TreeMap;
 
 import com.classes.*;
 
-import javafx.beans.binding.ObjectExpression; 
 
-
-public class Client {
+public class Client implements Runnable{
     public static String DEFAULT_IP = "127.0.0.1";
     public static int DEFAULT_PORT = 8080;
 
@@ -26,6 +24,9 @@ public class Client {
 
     private ArrayList<User> _users;
 
+    private int _requestCodeToRun;
+    private int _runStatus;
+
     public Client(){
         this(DEFAULT_IP, DEFAULT_PORT);
     }
@@ -35,6 +36,9 @@ public class Client {
         this._port = port;
 
         this._users = null;
+
+        this._runStatus = 0;
+        this._requestCodeToRun = 0;
 
         System.out.println("---------------------------------------------");
         System.out.println("Initialized client. Will try to connect to: ");
@@ -119,5 +123,18 @@ public class Client {
         }
 
         return null;
+    }
+
+    @Override
+    public void run() {
+        this._runStatus = this.proccessRequest(this._requestCodeToRun);
+    }
+
+    public void setRequestCodeToRun(int code){
+        this._requestCodeToRun = code;
+    }
+
+    public int getRunStatus(){
+        return this._runStatus;
     }
 }

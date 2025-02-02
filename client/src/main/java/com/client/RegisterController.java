@@ -101,8 +101,19 @@ public class RegisterController extends Controller {
             _me.setUsername(username_text_field.getText().trim());
             _me.setPassword(password_text_field.getText().trim());
             
-            // send the request to the server and proccess the response
-            int connectStatus = _client.proccessRequest(Codes.REGISTER_REQUEST);
+            // send the request to the server via threads
+            Thread clientThread = new Thread(_client);
+            _client.setRequestCodeToRun(Codes.REGISTER_REQUEST);
+            clientThread.start();
+
+            try {
+                clientThread.join();
+            } catch (InterruptedException e) {
+                System.out.println("Finished");
+            }
+
+            // get the status of the request - connected or not to the server
+            int connectStatus = _client.getRunStatus();
 
             // didn't connect to the server
             if(connectStatus == Codes.CONNECTION_ERROR){
