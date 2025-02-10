@@ -18,3 +18,5 @@ DESIGN IDEA:
 3. UserMessageContainer - stores the message queue, is connected/not, more data... (maybe add the data to User/ThisUser/inherit)
 4. TreeMap<UserMessageContainer> - stores the users and their containers.
 5. UserManagmentContainer - stores the users treemap and more data
+
+update
